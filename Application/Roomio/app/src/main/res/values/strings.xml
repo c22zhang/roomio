@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Room.io</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="enter_username_text">Enter Username</string>
+    <string name="enter_password_text">password</string>
+    <string name="sign_in_button_text">Sign In</string>
+    <string name="sign_up_button_text">New? Sign Up</string>
+</resources>
