@@ -6,4 +6,14 @@
     <string name="enter_password_text">password</string>
     <string name="sign_in_button_text">Sign In</string>
     <string name="sign_up_button_text">New? Sign Up</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="name_text">Name:</string>
+    <string name="password_text">Password:</string>
+    <string name="email_text">Email:</string>
+    <string name="username_text">Username:</string>
+    <string name="re_enter_password">Re-enter password:</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_email">Your Email</string>
+    <string name="intended_username">Intended Username</string>
+    <string name="intended_password">Intended Password</string>
 </resources>
