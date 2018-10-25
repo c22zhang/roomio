@@ -28,15 +28,22 @@ public class LoginActivity extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                transitionToSignUp();
+                transition(SignUpActivity.class);
+            }
+        });
+
+        signin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                transition(PersonalNotificationActivity.class);
             }
         });
 
         this.getSupportActionBar().setTitle("Welcome to Room.io!");
     }
 
-    private void transitionToSignUp(){
-        Intent intent = new Intent(this, SignUpActivity.class);
+    private<T> void transition(Class<T> clazz){
+        Intent intent = new Intent(this, clazz);
         startActivity(intent);
     }
 

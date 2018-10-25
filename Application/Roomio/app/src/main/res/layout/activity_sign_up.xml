@@ -27,7 +27,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:layout_marginBottom="40dp"
         android:text="@string/name_text"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/userText"
@@ -40,7 +39,7 @@
         android:layout_marginBottom="40dp"
         android:text="@string/password_text"
         android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/reenterText"
+        app:layout_constraintBottom_toBottomOf="@+id/intendedPasswordEditText"
         app:layout_constraintStart_toStartOf="@+id/reenterText"
         app:layout_constraintTop_toTopOf="@+id/intendedPasswordEditText"
         app:layout_constraintVertical_bias="0.0" />
@@ -49,7 +48,7 @@
         android:id="@+id/emailText"
         android:layout_width="102dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="68dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/email_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordText"
@@ -89,6 +88,7 @@
         android:ems="10"
         android:hint="@string/your_name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/nameText"
         app:layout_constraintStart_toStartOf="@+id/intendedUsernameEditText"
         app:layout_constraintTop_toTopOf="@+id/nameText" />
 
@@ -99,6 +99,7 @@
         android:ems="10"
         android:hint="@string/intended_username"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="@+id/userText"
         app:layout_constraintStart_toStartOf="@+id/emailEditText"
         app:layout_constraintTop_toTopOf="@+id/userText" />
 
@@ -109,6 +110,7 @@
         android:ems="10"
         android:hint="@string/your_email"
         android:inputType="textEmailAddress|textEmailSubject"
+        app:layout_constraintBottom_toBottomOf="@+id/emailText"
         app:layout_constraintStart_toStartOf="@+id/intendedPasswordEditText"
         app:layout_constraintTop_toTopOf="@+id/emailText" />
 
@@ -116,7 +118,7 @@
         android:id="@+id/intendedPasswordEditText"
         android:layout_width="175dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="@string/intended_password"
         android:inputType="textPassword"
