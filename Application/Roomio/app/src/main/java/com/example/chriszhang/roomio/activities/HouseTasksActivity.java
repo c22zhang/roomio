@@ -15,8 +15,7 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
-public class HouseTasksActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class HouseTasksActivity extends ParentDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,26 +41,5 @@ public class HouseTasksActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
     }
 }

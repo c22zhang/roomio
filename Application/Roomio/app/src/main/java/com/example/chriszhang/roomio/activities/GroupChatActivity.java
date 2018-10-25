@@ -1,6 +1,5 @@
 package com.example.chriszhang.roomio.activities;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -13,21 +12,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
-import com.example.chriszhang.roomio.adapters.PersonalNotificationAdapter;
 
-public class NotificationsActivity extends ParentDrawerActivity {
-
-    //TODO: Replace with actual user data once other stuff is completed
-    String[] placeholders = {"This is a Notification.", "This is also a notification."};
-    ListView listView;
+public class GroupChatActivity extends ParentDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_group);
+        setContentView(R.layout.activity_group_chat);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -48,11 +41,5 @@ public class NotificationsActivity extends ParentDrawerActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        PersonalNotificationAdapter notificationAdapter =
-                new PersonalNotificationAdapter(this, placeholders);
-
-        listView = findViewById(R.id.personalNotificationList);
-        listView.setAdapter(notificationAdapter);
     }
 }

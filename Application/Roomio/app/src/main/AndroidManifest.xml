@@ -32,6 +32,14 @@
         <activity
             android:name=".activities.HouseTasksActivity"
             android:label="@string/title_activity_house_tasks"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.GroupChatActivity"
+            android:label="@string/title_activity_group_chat"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.ParentDrawerActivity"
+            android:label="@string/title_activity_parent_drawer"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 

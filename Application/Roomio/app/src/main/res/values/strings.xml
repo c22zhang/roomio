@@ -32,4 +32,6 @@
     <string name="room_io_navigation">Room.io Navigation</string>
     <string name="title_activity_my_tabs">MyTabsActivity</string>
     <string name="title_activity_house_tasks">HouseTasksActivity</string>
+    <string name="title_activity_group_chat">GroupChatActivity</string>
+    <string name="title_activity_parent_drawer">ParentDrawerActivity</string>
 </resources>
