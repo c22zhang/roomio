@@ -20,6 +20,18 @@
         <activity
             android:name=".activities.NotificationsActivity"
             android:label="@string/title_activity_notifications"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.CreateGroupActivity"
+            android:label="@string/title_activity_create_group"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.MyTabsActivity"
+            android:label="@string/title_activity_my_tabs"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".activities.HouseTasksActivity"
+            android:label="@string/title_activity_house_tasks"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 

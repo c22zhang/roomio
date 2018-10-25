@@ -12,17 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
-import com.example.chriszhang.roomio.adapters.PersonalNotificationAdapter;
 
-public class NotificationsActivity extends AppCompatActivity
+public class CreateGroupActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-    //TODO: Replace with actual user data once other stuff is completed
-    String[] placeholders = {"This is a Notification.", "This is also a notification."};
-    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +42,6 @@ public class NotificationsActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-        PersonalNotificationAdapter notificationAdapter =
-                new PersonalNotificationAdapter(this, placeholders);
-
-        listView = findViewById(R.id.personalNotificationList);
-        listView.setAdapter(notificationAdapter);
     }
 
     @Override
@@ -71,7 +59,6 @@ public class NotificationsActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
