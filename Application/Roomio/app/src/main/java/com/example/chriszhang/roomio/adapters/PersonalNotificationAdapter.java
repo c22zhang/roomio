@@ -1,4 +1,4 @@
-package com.example.chriszhang.roomio;
+package com.example.chriszhang.roomio.adapters;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.chriszhang.roomio.R;
 
 public class PersonalNotificationAdapter extends ArrayAdapter {
 

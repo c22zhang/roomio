@@ -1,4 +1,4 @@
-package com.example.chriszhang.roomio;
+package com.example.chriszhang.roomio.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.chriszhang.roomio.R;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -16,7 +18,6 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        this.getSupportActionBar().setTitle("Sign Up");
 
         nameEditText = findViewById(R.id.nameEditText);
         emailEditText = findViewById(R.id.emailEditText);
@@ -33,7 +34,9 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setTitle("Sign Up");
+        }
     }
 
     private void transitionToLogin() {

@@ -4,7 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".activities.LoginActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/signInToolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2c2fe8"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:title="Welcome to Room.io!"
+        app:titleTextColor="#FFFFFF"
+        />
 
     <TextView
         android:id="@+id/roomioText"

@@ -4,7 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SignUpActivity">
+    tools:context=".activities.SignUpActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/signUpToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#2c2fe8"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:title="Sign Up"
+        app:titleTextColor="#FFFFFF"/>
 
     <Button
         android:id="@+id/signUpActivityButton"

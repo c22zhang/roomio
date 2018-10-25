@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/navGroupChat"
+            android:title="@string/roommate_gc" />
+        <item
+            android:id="@+id/navTasks"
+            android:title="@string/house_tasks" />
+        <item
+            android:id="@+id/navTabs"
+            android:title="@string/my_tabs" />
+        <item
+            android:id="@+id/navCreateGroups"
+            android:title="@string/create_group" />
+    </group>
+
+</menu>
