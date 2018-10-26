@@ -41,6 +41,8 @@ public final class User implements Jsonable {
     public void setAdminedGroupId(Optional<String> adminedGroupId) { this.adminedGroupId = adminedGroupId; }
     public Optional<String> getHouseholdGroupId() { return householdGroupId; }
     public void setHouseholdGroupId(Optional<String> householdGroupId) { this.householdGroupId = householdGroupId; }
+    public List<Notification> getNotifications() { return notifications; }
+    public List<Tab> getMyTabs() { return myTabs; }
 
     public void addNotification(Notification notification){
         this.notifications.add(notification);
@@ -51,14 +53,14 @@ public final class User implements Jsonable {
     }
 
     public void deleteNotification(Notification notification){
-        if(notifications.indexOf(notification) != -1){
-            notifications.remove(notifications.indexOf(notification));
+        if(notifications.contains(notification)){
+            notifications.remove(notification);
         }
     }
 
     public void deleteTab(Tab tab){
-        if(myTabs.indexOf(tab) != -1){
-            myTabs.remove(myTabs.indexOf((tab)));
+        if(myTabs.contains(tab)){
+            myTabs.remove(tab);
         }
     }
 
@@ -75,6 +77,9 @@ public final class User implements Jsonable {
                 Optional.of(myTabs.get(myTabs.indexOf(tab))) :
                 maybeTab;
     }
+
+    //TODO
+    public void editTab(Tab tab){}
 
 
     @Override
