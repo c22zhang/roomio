@@ -28,6 +28,7 @@ public final class Group implements Jsonable {
     public void setGroupName(String groupName) { this.groupName = groupName; }
     public List<User> getMembers() { return members; }
     public List<Task> getTasks() { return tasks; }
+    public List<Message> getGroupChatMessages() { return groupChatMessages; }
 
     public void addMember(User member) {
         members.add(member);
@@ -67,7 +68,7 @@ public final class Group implements Jsonable {
                 maybeTask;
     }
 
-    //TODO
+    //TODO: implement these if necessary
     public void updateMember(User member) {}
 
     public void updateTask(Task task) {}
