@@ -102,12 +102,12 @@ public final class User implements Jsonable {
         obj.put("name", name);
         obj.put("email", email);
 
-        if(householdGroupId.isPresent()){
-            obj.put("member_group_id", householdGroupId.get());
-        }
-
         if(adminedGroupId.isPresent()){
             obj.put("admined_group_id", adminedGroupId.get());
+        }
+
+        if(householdGroupId.isPresent()){
+            obj.put("member_group_id", householdGroupId.get());
         }
 
         obj.put("involved_tabs", generateTabsList());

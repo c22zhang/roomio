@@ -23,7 +23,7 @@ public final class Notification implements Jsonable {
     private final String notificationId, toUserId, fromUserId;
     private final boolean isClearable;
     private final Type notificationType;
-    private HashMap<Type, String> messageMap;
+    private HashMap<Type, String> messageMap = new HashMap<Type, String>();
 
     public Notification(
             String notificationId,
