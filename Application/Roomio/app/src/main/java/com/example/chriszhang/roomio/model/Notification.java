@@ -1,5 +1,6 @@
 package com.example.chriszhang.roomio.model;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -17,7 +18,6 @@ public final class Notification implements Jsonable {
         Type(boolean isClearable){
             this.isClearable = isClearable;
         }
-
     }
 
     private final String notificationId, toUserId, fromUserId;
@@ -66,11 +66,20 @@ public final class Notification implements Jsonable {
 
     @Override
     public String toString() {
-        return super.toString();
-    }
+        try{
+            return toJson().toString();
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }    }
 
     @Override
-    public JSONObject toJson() {
-        return null;
+    public JSONObject toJson() throws JSONException{
+        JSONObject obj = new JSONObject();
+        obj.put("notification_id", notificationId);
+        obj.put("to_user_id", toUserId);
+        obj.put("from_user_id", fromUserId);
+        obj.put("notification_type", notificationType.toString());
+        return obj;
     }
 }

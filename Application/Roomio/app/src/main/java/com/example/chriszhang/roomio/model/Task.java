@@ -1,25 +1,26 @@
 package com.example.chriszhang.roomio.model;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
 
 public final class Task implements Jsonable {
 
-    private final String taskId, assigneeUserId, assignedUserId;
-    private final Date dateAssigned;
+    private final String taskId, assigneeUserId, assignerUserId;
+    private final String dateAssigned;
     private String taskName, description;
 
     public Task(
             String taskId,
             String assigneeUserId,
-            String assignedUserId,
+            String assignerUserId,
             String taskName,
             String description,
-            Date dateAssigned){
+            String dateAssigned){
         this.taskId = taskId;
         this.assigneeUserId = assigneeUserId;
-        this.assignedUserId = assignedUserId;
+        this.assignerUserId = assignerUserId;
         this.taskName = taskName;
         this.description = description;
         this.dateAssigned = dateAssigned;
@@ -29,9 +30,9 @@ public final class Task implements Jsonable {
 
     public String getAssigneeUserId() { return assigneeUserId; }
 
-    public String getAssignedUserId() { return assignedUserId; }
+    public String getAssignerUserId() { return assignerUserId; }
 
-    public Date getDateAssigned() { return dateAssigned; }
+    public String getDateAssigned() { return dateAssigned; }
 
     public String getTaskName() { return taskName; }
 
@@ -43,11 +44,23 @@ public final class Task implements Jsonable {
 
     @Override
     public String toString() {
-        return super.toString();
+        try{
+            return toJson().toString();
+        } catch(JSONException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
-    public JSONObject toJson() {
-        return null;
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("task_id", taskId);
+        obj.put("assignee", assigneeUserId);
+        obj.put("assigner", assignerUserId);
+        obj.put("task_name", taskName);
+        obj.put("description", description);
+        obj.put("date_assigned", dateAssigned);
+        return obj;
     }
 }

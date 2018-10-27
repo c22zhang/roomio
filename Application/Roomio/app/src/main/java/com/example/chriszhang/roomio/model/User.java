@@ -1,5 +1,7 @@
 package com.example.chriszhang.roomio.model;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -36,7 +38,7 @@ public final class User implements Jsonable {
     public String getName() { return name; }
     public String getEmail() { return email; }
     //TODO: add some extra verification to this;
-    public String getPassword() { return ""; }
+    public String getPassword() { return password; }
     public Optional<String> getAdminedGroupId() { return adminedGroupId; }
     public void setAdminedGroupId(Optional<String> adminedGroupId) { this.adminedGroupId = adminedGroupId; }
     public Optional<String> getHouseholdGroupId() { return householdGroupId; }
@@ -81,14 +83,53 @@ public final class User implements Jsonable {
     //TODO
     public void editTab(Tab tab){}
 
-
-    @Override
-    public JSONObject toJson() {
-        return null;
-    }
-
     @Override
     public String toString() {
-        return super.toString();
+        try{
+            return toJson().toString();
+        } catch (JSONException e){
+            e.printStackTrace();
+            return null;
+        }
     }
+
+
+    @Override
+    public JSONObject toJson() throws JSONException {
+        JSONObject obj = new JSONObject();
+        obj.put("user_id", userId);
+        obj.put("username", username);
+        obj.put("name", name);
+        obj.put("email", email);
+
+        if(householdGroupId.isPresent()){
+            obj.put("member_group_id", householdGroupId.get());
+        }
+
+        if(adminedGroupId.isPresent()){
+            obj.put("admined_group_id", adminedGroupId.get());
+        }
+
+        obj.put("involved_tabs", generateTabsList());
+        obj.put("notifications", generateNotificationsList());
+        return obj;
+    }
+
+    private JSONArray generateTabsList() throws JSONException {
+        JSONArray array = new JSONArray();
+        for(Tab tab : myTabs){
+            array.put(tab.toJson());
+        }
+        return array;
+    }
+
+    private JSONArray generateNotificationsList() throws JSONException {
+        JSONArray array = new JSONArray();
+        for(Notification notification: notifications){
+            array.put(notification.toJson());
+        }
+        return array;
+    }
+
+
 }
