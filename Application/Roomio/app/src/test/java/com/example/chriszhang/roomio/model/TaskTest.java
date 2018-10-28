@@ -15,6 +15,27 @@ public class TaskTest {
             "12/11");
 
     @Test
+    public void testGetters() {
+        assert(task.getTaskId().equals("123a"));
+        assert(task.getAssigneeUserId().equals("bob"));
+        assert(task.getAssignerUserId().equals("joe"));
+        assert(task.getTaskName().equals("trash"));
+        assert(task.getDescription().equals("take out the trash"));
+        assert(task.getDateAssigned().equals("12/11"));
+    }
+
+    @Test
+    public void testSetters() {
+        Task copy = task;
+        copy.setAssigneeUserId("hey");
+        copy.setDescription("do something");
+        copy.setTaskName("doing something");
+        assert(copy.getAssigneeUserId().equals("hey"));
+        assert(copy.getDescription().equals("do something"));
+        assert(copy.getTaskName().equals("doing something"));
+    }
+
+    @Test
     public void testToJson() throws Exception {
 
         JSONObject obj = task.toJson();

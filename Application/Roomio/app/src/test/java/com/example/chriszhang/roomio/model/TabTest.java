@@ -15,6 +15,30 @@ public class TabTest {
             123.12);
 
     @Test
+    public void testGetters() {
+        assert(tab.getTabId().equals("asdf"));
+        assert(tab.getTabName().equals("food"));
+        assert(tab.getReason().equals("your food"));
+        assert(tab.getAssigneeUserId().equals("bob"));
+        assert(tab.getAssignerUserId().equals("joe"));
+        assert(tab.getDateAssigned().equals("12/12"));
+        assert(tab.getAmount().equals(123.12));
+    }
+
+    @Test
+    public void testSetters() {
+        Tab copy = tab;
+        copy.setTabName("rent");
+        copy.setReason("pay ur rent dude");
+        copy.setAmount(5000.00);
+        copy.setAssigneeUserId("asdf");
+        assert(copy.getTabName().equals("rent"));
+        assert(copy.getReason().equals("pay ur rent dude"));
+        assert(copy.getAmount().equals(5000.00));
+        assert(copy.getAssigneeUserId().equals("asdf"));
+    }
+
+    @Test
     public void testToJson() throws Exception {
         JSONObject obj = tab.toJson();
         assert(obj.get("tab_id").equals("asdf"));

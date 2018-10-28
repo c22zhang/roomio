@@ -7,9 +7,9 @@ import java.util.Date;
 
 public final class Tab implements Jsonable {
 
-    private final String tabId, assigneeUserId, assignerUserId;
+    private final String tabId, assignerUserId;
     private final String dateAssigned;
-    private String tabName, reason;
+    private String tabName, reason, assigneeUserId;
     private Double amount;
 
     public Tab(
@@ -30,24 +30,16 @@ public final class Tab implements Jsonable {
     }
 
     public String getTabId() { return tabId; }
-
     public String getAssignerUserId() { return assignerUserId; }
-
     public String getAssigneeUserId() { return assigneeUserId; }
-
     public String getDateAssigned() { return dateAssigned; }
-
     public String getTabName() { return tabName; }
-
     public void setTabName(String tabName) { this.tabName = tabName; }
-
     public String getReason() { return reason; }
-
     public void setReason(String reason) { this.reason = reason; }
-
     public Double getAmount() { return amount; }
-
     public void setAmount(Double amount) { this.amount = amount; }
+    public void setAssigneeUserId(String assigneeUserId) { this.assigneeUserId = assigneeUserId; }
 
     @Override
     public String toString() {

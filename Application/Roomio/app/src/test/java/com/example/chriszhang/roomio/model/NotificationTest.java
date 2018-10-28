@@ -12,9 +12,17 @@ public class NotificationTest {
             Notification.Type.CLEAR_TAB_REQ);
 
     @Test
+    public void testGetters() {
+        assert(notification.getNotificationId().equals("asdfasdf"));
+        assert(notification.getToUserId().equals("bob"));
+        assert(notification.getFromUserId().equals("joe"));
+        assert(notification.getNotificationType().equals(Notification.Type.CLEAR_TAB_REQ));
+        assert(notification.isClearable());
+    }
+
+    @Test
     public void testToJson() throws Exception {
         JSONObject obj = notification.toJson();
-        System.out.println(obj);
         assert(obj.get("notification_id").equals("asdfasdf"));
         assert(obj.get("to_user_id").equals("bob"));
         assert(obj.get("from_user_id").equals("joe"));

@@ -45,24 +45,7 @@ public final class Notification implements Jsonable {
     public boolean isClearable() { return isClearable; }
     public Type getNotificationType() { return notificationType; }
 
-    //TODO: make these messages better once you write the means to
-    private void initializeMessages(){
-        messageMap.put(
-                Type.ANONYMOUS_BUTTON,
-                "Someone has anonymously sent you a message: message_here");
-        messageMap.put(
-                Type.ASSIGNMENT,
-                "Someone has assigned you something");
-        messageMap.put(
-                Type.CLEAR_TAB_REQ,
-                "Someone has requested you to clear a tab you assigned.");
-        messageMap.put(
-                Type.CLEAR_TASK_REQ,
-                "Someone has requested you to clear a task you assigned them.");
-        messageMap.put(
-                Type.REQ_ACCEPTANCE,
-                "Someone has cleared your task/tab.");
-    }
+
 
     @Override
     public String toString() {
@@ -81,5 +64,24 @@ public final class Notification implements Jsonable {
         obj.put("from_user_id", fromUserId);
         obj.put("notification_type", notificationType.toString());
         return obj;
+    }
+
+    //TODO: make these messages better once you write the means to
+    private void initializeMessages(){
+        messageMap.put(
+                Type.ANONYMOUS_BUTTON,
+                "Someone has anonymously sent you a message: message_here");
+        messageMap.put(
+                Type.ASSIGNMENT,
+                "Someone has assigned you something");
+        messageMap.put(
+                Type.CLEAR_TAB_REQ,
+                "Someone has requested you to clear a tab you assigned.");
+        messageMap.put(
+                Type.CLEAR_TASK_REQ,
+                "Someone has requested you to clear a task you assigned them.");
+        messageMap.put(
+                Type.REQ_ACCEPTANCE,
+                "Someone has cleared your task/tab.");
     }
 }

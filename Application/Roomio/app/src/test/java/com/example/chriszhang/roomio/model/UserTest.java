@@ -32,6 +32,25 @@ public class UserTest {
             "12/12",
             123.12);
 
+    @Test
+    public void testGetters() {
+        assert(user.getUserId().equals("asdf"));
+        assert(user.getUsername().equals("test"));
+        assert(user.getName().equals("Testy McTesterson"));
+        assert(user.getEmail().equals("test@gmail.com"));
+        assert(user.getPassword().equals("password"));
+        assert(user.getAdminedGroupId().equals(Optional.of("1234")));
+        assert(user.getHouseholdGroupId().equals(Optional.empty()));
+    }
+
+    @Test
+    public void testSetters() {
+        User copy = user;
+        copy.setAdminedGroupId(Optional.of("1231"));
+        assert(user.getAdminedGroupId().equals(Optional.of("1231")));
+        copy.setHouseholdGroupId(Optional.of("0000"));
+        assert(user.getHouseholdGroupId().equals(Optional.of("0000")));
+    }
 
     @Test
     public void testAddTab() {

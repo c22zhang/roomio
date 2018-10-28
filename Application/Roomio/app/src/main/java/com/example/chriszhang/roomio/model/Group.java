@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Represents a roommate group within Room.io.
+ */
 public final class Group implements Jsonable {
 
     private final String groupId, groupAdminUserId;

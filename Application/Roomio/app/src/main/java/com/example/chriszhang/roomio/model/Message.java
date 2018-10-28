@@ -24,7 +24,7 @@ public final class Message implements Jsonable{
     public String getMessageId() { return messageId; }
     public String getMessageContents() { return messageContents; }
     public String getSenderId() { return senderId; }
-    public String dateSent() { return dateSent; }
+    public String getDateSent() { return dateSent; }
 
     @Override
     public JSONObject toJson() throws JSONException {

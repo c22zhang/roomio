@@ -12,6 +12,14 @@ public class MessageTest {
                     "12/1");
 
     @Test
+    public void testGetters() {
+        assert(message.getMessageId().equals("addddsa"));
+        assert(message.getMessageContents().equals("Hello world"));
+        assert(message.getSenderId().equals("bob"));
+        assert(message.getDateSent().equals("12/1"));
+    }
+
+    @Test
     public void testToJson() throws Exception {
         JSONObject obj = message.toJson();
         assert(obj.get("message_id").equals("addddsa"));

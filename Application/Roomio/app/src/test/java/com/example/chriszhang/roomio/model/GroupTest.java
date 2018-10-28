@@ -36,6 +36,20 @@ public class GroupTest {
             "12/11");
 
     @Test
+    public void testGetters() {
+        assert(group.getGroupId().equals("asdf"));
+        assert(group.getGroupAdminUserId().equals("bob"));
+        assert(group.getGroupName().equals("123 Mulberry ln"));
+    }
+
+    @Test
+    public void testSetters(){
+        Group group2 = group;
+        group2.setGroupName("hey");
+        assert(group2.getGroupName().equals("hey"));
+    }
+
+    @Test
     public void testAddMember() {
         group.addMember(user);
         assert(group.getMembers().get(0).equals(user));
