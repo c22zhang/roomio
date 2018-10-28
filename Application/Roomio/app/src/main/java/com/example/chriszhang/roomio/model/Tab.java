@@ -1,9 +1,11 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Date;
+import java.util.Set;
 
 public final class Tab implements Jsonable {
 
@@ -62,5 +64,29 @@ public final class Tab implements Jsonable {
         obj.put("date_assigned", dateAssigned);
         obj.put("amount", amount);
         return obj;
+    }
+
+    public static Tab from(JSONObject json) throws JsonToObjectException, JSONException {
+        Set<String> requiredFields =
+                Utils.requiredFieldSet(
+                        "tab_id",
+                        "tab_name",
+                        "reason",
+                        "assignee",
+                        "assigner",
+                        "date_assigned",
+                        "amount");
+        if(Utils.containsRequiredFields(json, requiredFields)){
+            return new Tab(
+                    (String) json.get("tab_id"),
+                    (String) json.get("tab_name"),
+                    (String) json.get("reason"),
+                    (String) json.get("assignee"),
+                    (String) json.get("assigner"),
+                    (String) json.get("date_assigned"),
+                    (Double) json.get("amount"));
+        } else {
+            throw new JsonToObjectException("Did not contain all required fields");
+        }
     }
 }

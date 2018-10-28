@@ -1,9 +1,12 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.Set;
 
 public final class Message implements Jsonable{
 
@@ -43,6 +46,24 @@ public final class Message implements Jsonable{
         } catch(JSONException e){
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static Message from(JSONObject obj) throws JsonToObjectException, JSONException {
+        Set<String> required =
+                Utils.requiredFieldSet(
+                        "message_id",
+                        "message_contents",
+                        "sender_id",
+                        "date_sent");
+        if(Utils.containsRequiredFields(obj, required)){
+            return new Message(
+                    (String) obj.get("message_id"),
+                    (String) obj.get("message_contents"),
+                    (String) obj.get("sender_id"),
+                    (String) obj.get("date_sent"));
+        } else {
+            throw new JsonToObjectException("Missing required fields");
         }
     }
 }

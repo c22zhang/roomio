@@ -1,9 +1,12 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Date;
+import java.util.HashSet;
 
 public final class Task implements Jsonable {
 
@@ -56,5 +59,27 @@ public final class Task implements Jsonable {
         obj.put("description", description);
         obj.put("date_assigned", dateAssigned);
         return obj;
+    }
+
+    public static Task from(JSONObject obj) throws JsonToObjectException, JSONException {
+        HashSet<String> required =
+                Utils.requiredFieldSet(
+                        "task_id",
+                        "assignee",
+                        "assigner",
+                        "task_name",
+                        "description",
+                        "date_assigned");
+        if(Utils.containsRequiredFields(obj, required)){
+            return new Task(
+                    (String) obj.get("task_id"),
+                    (String) obj.get("assignee"),
+                    (String) obj.get("assigner"),
+                    (String) obj.get("task_name"),
+                    (String) obj.get("description"),
+                    (String) obj.get("date_assigned"));
+        } else {
+            throw new JsonToObjectException("Did not have required fields.");
+        }
     }
 }

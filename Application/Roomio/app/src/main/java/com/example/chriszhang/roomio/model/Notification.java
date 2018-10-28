@@ -1,9 +1,12 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Set;
 
 public final class Notification implements Jsonable {
 
@@ -54,7 +57,8 @@ public final class Notification implements Jsonable {
         } catch(JSONException e){
             e.printStackTrace();
             return null;
-        }    }
+        }
+    }
 
     @Override
     public JSONObject toJson() throws JSONException{
@@ -64,6 +68,24 @@ public final class Notification implements Jsonable {
         obj.put("from_user_id", fromUserId);
         obj.put("notification_type", notificationType.toString());
         return obj;
+    }
+
+    public static Notification from(JSONObject obj) throws JsonToObjectException, JSONException {
+        Set<String> required =
+                Utils.requiredFieldSet(
+                        "notification_id",
+                        "to_user_id",
+                        "from_user_id",
+                        "notification_type");
+        if(Utils.containsRequiredFields(obj, required)){
+            return new Notification(
+                    (String) obj.get("notification_id"),
+                    (String) obj.get("to_user_id"),
+                    (String) obj.get("from_user_id"),
+                    Type.valueOf((String) obj.get("notification_type")));
+        } else {
+            throw new JsonToObjectException("Missing required fields");
+        }
     }
 
     //TODO: make these messages better once you write the means to
