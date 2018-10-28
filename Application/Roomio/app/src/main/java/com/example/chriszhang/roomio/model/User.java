@@ -1,12 +1,16 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public final class User implements Jsonable {
 
@@ -131,5 +135,59 @@ public final class User implements Jsonable {
         return array;
     }
 
+    public static User from(JSONObject obj) throws JsonToObjectException, JSONException {
+        User user;
+        Set<String> required =
+                Utils.requiredFieldSet(
+                        "user_id",
+                        "username",
+                        "name",
+                        "email",
+                        "password",
+                        "involved_tabs",
+                        "notifications");
+        Optional<String> adminedGroupId = Optional.empty();
+        Optional<String> houseHoldGroupId = Optional.empty();
+        if(Utils.containsRequiredFields(obj, required)){
+            if(obj.has("admined_group_id")){
+                adminedGroupId = Optional.of((String) obj.get("admined_group_id"));
+            }
+            if(obj.has("member_group_id")){
+                houseHoldGroupId = Optional.of((String) obj.get("member_group_id"));
+            }
+            JSONArray tabs = obj.getJSONArray("involved_tabs");
+            JSONArray notifications = obj.getJSONArray("notifications");
+
+            user = new User(
+                    (String) obj.get("user_id"),
+                    (String) obj.get("username"),
+                    (String) obj.get("name"),
+                    (String) obj.get("email"),
+                    (String) obj.get("password"),
+                    adminedGroupId,
+                    houseHoldGroupId);
+            user = parseNotifications(notifications, user);
+            user = parseTabs(tabs, user);
+            return user;
+        } else {
+            throw new JsonToObjectException("Missing required fields");
+        }
+    }
+
+    private static User parseNotifications(JSONArray arr, User user)
+            throws JSONException, JsonToObjectException {
+        for(int i = 0; i < arr.length(); i++){
+            user.addNotification(Notification.from((JSONObject) arr.get(i)));
+        }
+        return user;
+    }
+
+    private static User parseTabs(JSONArray arr, User user)
+        throws JSONException, JsonToObjectException {
+        for (int i = 0; i < arr.length(); i++){
+            user.addTab(Tab.from((JSONObject) arr.get(i)));
+        }
+        return user;
+    }
 
 }

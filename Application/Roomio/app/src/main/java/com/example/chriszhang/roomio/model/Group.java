@@ -1,5 +1,7 @@
 package com.example.chriszhang.roomio.model;
 
+import com.example.chriszhang.roomio.utils.Utils;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -7,6 +9,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Represents a roommate group within Room.io.
@@ -99,6 +102,57 @@ public final class Group implements Jsonable {
         object.put("messages", generateMessageList());
 
         return object;
+    }
+
+    public static Group from(JSONObject obj) throws JSONException, JsonToObjectException {
+        Group group;
+        Set<String> required =
+                Utils.requiredFieldSet(
+                        "group_id",
+                        "group_name",
+                        "group_admin_user_id",
+                        "members",
+                        "group_tasks",
+                        "messages");
+        if(Utils.containsRequiredFields(obj, required)){
+            JSONArray members = obj.getJSONArray("members");
+            JSONArray tasks = obj.getJSONArray("group_tasks");
+            JSONArray messages = obj.getJSONArray("messages");
+            group = new Group(
+                    (String) obj.get("group_id"),
+                    (String) obj.get("group_name"),
+                    (String) obj.get("group_admin_user_id"));
+            group = parseMembers(group, members);
+            group = parseMessages(group, messages);
+            group = parseTasks(group, tasks);
+            return group;
+        } else {
+            throw new JsonToObjectException("Missing required fields");
+        }
+    }
+
+    private static Group parseMessages(Group group, JSONArray array)
+        throws JsonToObjectException, JSONException {
+        for(int i = 0; i < array.length(); i++) {
+            group.addMessage(Message.from((JSONObject) array.get(i)));
+        }
+        return group;
+    }
+
+    private static Group parseTasks(Group group, JSONArray array)
+            throws JsonToObjectException, JSONException {
+        for(int i = 0; i < array.length(); i++) {
+            group.addTask(Task.from((JSONObject) array.get(i)));
+        }
+        return group;
+    }
+
+    private static Group parseMembers(Group group, JSONArray array)
+            throws JsonToObjectException, JSONException {
+        for(int i = 0; i < array.length(); i++) {
+            group.addMember(User.from((JSONObject) array.get(i)));
+        }
+        return group;
     }
 
     private JSONArray generateMembersList() throws JSONException {
