@@ -164,5 +164,21 @@ public class GroupTest {
         assert(output.contains("\"date_sent\":\"12/1\""));
     }
 
+    @Test
+    public void testFrom() throws Exception {
+        group.addMember(user);
+        group.addMessage(message);
+        group.addTask(task);
+        JSONObject obj = group.toJson();
+        Group mGroup = Group.from(obj);
+        assert(mGroup.getGroupId().equals("asdf"));
+        assert(mGroup.getGroupAdminUserId().equals("bob"));
+        assert(mGroup.getGroupName().equals("123 Mulberry ln"));
+
+        assert(mGroup.getMembers().get(0).getUserId().equals(user.getUserId()));
+        assert(mGroup.getTasks().get(0).getTaskId().equals(task.getTaskId()));
+        assert(mGroup.getGroupChatMessages().get(0).getMessageId().equals(message.getMessageId()));
+    }
+
 
 }

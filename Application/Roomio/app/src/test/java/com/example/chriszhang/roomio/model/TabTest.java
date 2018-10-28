@@ -61,4 +61,17 @@ public class TabTest {
         assert(output.contains("\"date_assigned\":\"12/12\""));
         assert(output.contains("\"amount\":123.12"));
     }
+
+    @Test
+    public void testFrom() throws Exception {
+        JSONObject obj = tab.toJson();
+        Tab myTab = Tab.from(obj);
+        assert(myTab.getTabId().equals("asdf"));
+        assert(myTab.getTabName().equals("food"));
+        assert(myTab.getReason().equals("your food"));
+        assert(myTab.getAssigneeUserId().equals("bob"));
+        assert(myTab.getAssignerUserId().equals("joe"));
+        assert(myTab.getDateAssigned().equals("12/12"));
+        assert(myTab.getAmount().equals(123.12));
+    }
 }

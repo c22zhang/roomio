@@ -131,7 +131,6 @@ public class UserTest {
         user.addTab(tab);
         user.addNotification(notification);
         String output = user.toString();
-        System.out.println(user.toJson().toString(4));
         assert(output.contains("\"user_id\":\"asdf\""));
         assert(output.contains("\"username\":\"test\""));
         assert(output.contains("\"name\":\"Testy McTesterson\""));
@@ -150,6 +149,26 @@ public class UserTest {
         assert(output.contains("\"assigner\":\"joe\""));
         assert(output.contains("\"date_assigned\":\"12/12\""));
         assert(output.contains("\"amount\":123.12"));
+    }
+
+    @Test
+    public void testFrom() throws Exception {
+        user.addTab(tab);
+        user.addNotification(notification);
+        JSONObject obj = user.toJson();
+        User user = User.from(obj);
+        System.out.println(user.toJson().toString(4));
+        assert(user.getUserId().equals("asdf"));
+        assert(user.getUsername().equals("test"));
+        assert(user.getName().equals("Testy McTesterson"));
+        assert(user.getEmail().equals("test@gmail.com"));
+        assert(user.getPassword().equals("password"));
+        assert(user.getAdminedGroupId().equals(Optional.of("1234")));
+        assert(user.getHouseholdGroupId().equals(Optional.empty()));
+
+        assert(user.getMyTabs().get(0).getTabId().equals(tab.getTabId()));
+        assert(user.getNotifications().get(0).getNotificationId()
+                .equals(notification.getNotificationId()));
     }
 
 }

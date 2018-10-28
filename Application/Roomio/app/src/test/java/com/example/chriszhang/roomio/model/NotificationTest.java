@@ -37,4 +37,15 @@ public class NotificationTest {
         assert(output.contains("\"from_user_id\":\"joe\""));
         assert(output.contains("\"notification_type\":\"CLEAR_TAB_REQ\""));
     }
+
+    @Test
+    public void testFrom() throws Exception {
+        JSONObject obj = notification.toJson();
+        Notification notification = Notification.from(obj);
+        assert(notification.getNotificationId().equals("asdfasdf"));
+        assert(notification.getToUserId().equals("bob"));
+        assert(notification.getFromUserId().equals("joe"));
+        assert(notification.getNotificationType().equals(Notification.Type.CLEAR_TAB_REQ));
+        assert(notification.isClearable());
+    }
 }

@@ -58,4 +58,16 @@ public class TaskTest {
         assert(output.contains("\"description\":\"take out the trash\""));
         assert(output.contains("\"date_assigned\":\"12/11\""));
     }
+
+    @Test
+    public void testFrom() throws Exception {
+        JSONObject obj = task.toJson();
+        Task mTask = Task.from(obj);
+        assert(mTask.getTaskId().equals("123a"));
+        assert(mTask.getAssigneeUserId().equals("bob"));
+        assert(mTask.getAssignerUserId().equals("joe"));
+        assert(mTask.getTaskName().equals("trash"));
+        assert(mTask.getDescription().equals("take out the trash"));
+        assert(mTask.getDateAssigned().equals("12/11"));
+    }
 }

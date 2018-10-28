@@ -36,4 +36,15 @@ public class MessageTest {
         assert(output.contains("\"sender_id\":\"bob\""));
         assert(output.contains("\"date_sent\":\"12/1\""));
     }
+
+    @Test
+    public void testFrom() throws Exception {
+        JSONObject obj = message.toJson();
+        Message message = Message.from(obj);
+        assert(message.getMessageId().equals("addddsa"));
+        assert(message.getMessageContents().equals("Hello world"));
+        assert(message.getSenderId().equals("bob"));
+        assert(message.getDateSent().equals("12/1"));
+    }
+
 }

@@ -120,8 +120,8 @@ public final class Group implements Jsonable {
             JSONArray messages = obj.getJSONArray("messages");
             group = new Group(
                     (String) obj.get("group_id"),
-                    (String) obj.get("group_name"),
-                    (String) obj.get("group_admin_user_id"));
+                    (String) obj.get("group_admin_user_id"),
+                    (String) obj.get("group_name"));
             group = parseMembers(group, members);
             group = parseMessages(group, messages);
             group = parseTasks(group, tasks);

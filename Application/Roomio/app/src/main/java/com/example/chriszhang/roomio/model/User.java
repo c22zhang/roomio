@@ -105,6 +105,7 @@ public final class User implements Jsonable {
         obj.put("username", username);
         obj.put("name", name);
         obj.put("email", email);
+        obj.put("password", password);
 
         if(adminedGroupId.isPresent()){
             obj.put("admined_group_id", adminedGroupId.get());
