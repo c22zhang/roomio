@@ -8,12 +8,24 @@ import org.json.JSONObject;
 import java.util.Date;
 import java.util.HashSet;
 
+/**
+ * Represents a task that person needs to complete.
+ */
 public final class Task implements Jsonable {
 
     private final String taskId, assignerUserId;
     private final String dateAssigned;
     private String taskName, description, assigneeUserId;
 
+    /**
+     * General constructor for Task
+     * @param taskId unique identifier of the task
+     * @param assigneeUserId the userId of the person assigned the task
+     * @param assignerUserId the userId of the person assigning the task
+     * @param taskName the name of the task
+     * @param description the task description
+     * @param dateAssigned the date the task was assigned
+     */
     public Task(
             String taskId,
             String assigneeUserId,
@@ -29,6 +41,7 @@ public final class Task implements Jsonable {
         this.dateAssigned = dateAssigned;
     }
 
+    // assorted getters/setters
     public String getTaskId() { return taskId; }
     public String getAssigneeUserId() { return assigneeUserId; }
     public String getAssignerUserId() { return assignerUserId; }
@@ -39,6 +52,9 @@ public final class Task implements Jsonable {
     public void setDescription(String description) { this.description = description; }
     public void setAssigneeUserId(String assigneeUserId) { this.assigneeUserId = assigneeUserId; }
 
+    /**
+     * @return JSON string representation of this task
+     */
     @Override
     public String toString() {
         try{
@@ -49,6 +65,10 @@ public final class Task implements Jsonable {
         }
     }
 
+    /**
+     * @return a JSON representation of this Task
+     * @throws JSONException
+     */
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
@@ -61,6 +81,13 @@ public final class Task implements Jsonable {
         return obj;
     }
 
+    /**
+     * Convenience method for instantiating a Task from a JSON object
+     * @param obj a JSON object representing a Task
+     * @return a new Task object with the fields in the JSON object
+     * @throws JsonToObjectException if required fields are missing
+     * @throws JSONException if something goes wrong during JSON parsing
+     */
     public static Task from(JSONObject obj) throws JsonToObjectException, JSONException {
         HashSet<String> required =
                 Utils.requiredFieldSet(

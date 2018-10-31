@@ -15,7 +15,10 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
-public class MyTabsActivity extends ParentDrawerActivity {
+/**
+ * Activity for displaying your tabs
+ */
+public final class MyTabsActivity extends ParentDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

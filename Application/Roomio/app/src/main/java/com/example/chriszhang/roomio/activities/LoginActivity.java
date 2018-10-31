@@ -11,7 +11,10 @@ import com.example.chriszhang.roomio.R;
 
 import java.util.Optional;
 
-public class LoginActivity extends AppCompatActivity {
+/**
+ * Activity for the login screen
+ */
+public final class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
     private Button signup, signin;

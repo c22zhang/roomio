@@ -10,11 +10,19 @@ import java.util.Set;
 
 public final class Notification implements Jsonable {
 
+    /**
+     * Enum representing the five types of possible notifications.
+     */
     public enum Type {
+        //Anonymous button press
         ANONYMOUS_BUTTON(false),
+        //Request to clear a tab
         CLEAR_TAB_REQ(true),
+        //request to clear a task
         CLEAR_TASK_REQ(true),
+        //your request has been accepted
         REQ_ACCEPTANCE(false),
+        //you have been assigned a task
         ASSIGNMENT(false);
 
         private boolean isClearable;
@@ -28,6 +36,13 @@ public final class Notification implements Jsonable {
     private final Type notificationType;
     private HashMap<Type, String> messageMap = new HashMap<Type, String>();
 
+    /**
+     * General constructor for notification
+     * @param notificationId unique identifier for the notification
+     * @param toUserId userId of the person receiving it
+     * @param fromUserId userId of the person sending it
+     * @param notificationType the Notification.Type of this notification
+     */
     public Notification(
             String notificationId,
             String toUserId,
@@ -41,6 +56,7 @@ public final class Notification implements Jsonable {
         initializeMessages();
     }
 
+    // assorted getters
     public String getNotificationId() { return notificationId; }
     public String getMessage() { return messageMap.get(notificationType); }
     public String getToUserId() { return toUserId; }
@@ -49,7 +65,9 @@ public final class Notification implements Jsonable {
     public Type getNotificationType() { return notificationType; }
 
 
-
+    /**
+     * @return JSON string representing this notification
+     */
     @Override
     public String toString() {
         try{
@@ -60,6 +78,11 @@ public final class Notification implements Jsonable {
         }
     }
 
+    /**
+     *
+     * @return JSONObject conversion of this object
+     * @throws JSONException if JSON parsing goes wrong
+     */
     @Override
     public JSONObject toJson() throws JSONException{
         JSONObject obj = new JSONObject();
@@ -70,6 +93,13 @@ public final class Notification implements Jsonable {
         return obj;
     }
 
+    /**
+     * Convenience method for instantiating a Notification via JSONObject
+     * @param obj JSONObject representing a Notification
+     * @return a new Notification made with fields from the JSONObject
+     * @throws JsonToObjectException if something goes wrong with parsing JSON
+     * @throws JSONException if required fields are missing
+     */
     public static Notification from(JSONObject obj) throws JsonToObjectException, JSONException {
         Set<String> required =
                 Utils.requiredFieldSet(

@@ -79,22 +79,6 @@ public class UserTest {
     }
 
     @Test
-    public void testMaybeGetNotifications() {
-        //haven't put in notification yet, so returns empty
-        assert(user.maybeGetNotification(notification).equals(Optional.empty()));
-        //put in notification and test again, shouldn't return empty
-        user.addNotification(notification);
-        assert(user.maybeGetNotification(notification).equals(Optional.of(notification)));
-    }
-
-    @Test
-    public void testMaybeGetTab() {
-        assert(user.maybeGetTab(tab).equals(Optional.empty()));
-        user.addTab(tab);
-        assert(user.maybeGetTab(tab).equals(Optional.of(tab)));
-    }
-
-    @Test
     public void testToJson() throws Exception {
         user.addTab(tab);
         user.addNotification(notification);

@@ -16,6 +16,10 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
+/**
+ * Activity containing navigation logic for the navigation drawer. Any activity that
+ * is connected to the navigation drawer will extend this.
+ */
 public class ParentDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 

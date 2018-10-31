@@ -15,7 +15,10 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
-public class CreateGroupActivity extends ParentDrawerActivity{
+/**
+ * Activity where the user will create/update groups.
+ */
+public final class CreateGroupActivity extends ParentDrawerActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

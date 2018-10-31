@@ -9,7 +9,10 @@ import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
 
-public class SignUpActivity extends AppCompatActivity {
+/**
+ * Activity for users signing up
+ */
+public final class SignUpActivity extends AppCompatActivity {
 
     Button signUpButton;
     EditText nameEditText, emailEditText, usernameEditText, passwordEditText, reenterEditText;

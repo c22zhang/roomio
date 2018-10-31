@@ -9,5 +9,9 @@ import org.json.JSONObject;
  */
 public interface Jsonable {
 
+    /**
+     * @return A JSON object representation of whatever subclass is overriding this.
+     * @throws JSONException if something goes wrong while parsing JSON
+     */
     public JSONObject toJson() throws JSONException;
 }

@@ -18,7 +18,10 @@ import android.widget.ListView;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.PersonalNotificationAdapter;
 
-public class NotificationsActivity extends ParentDrawerActivity {
+/**
+ * Activity for displaying personal notifications
+ */
+public final class NotificationsActivity extends ParentDrawerActivity {
 
     //TODO: Replace with actual user data once other stuff is completed
     String[] placeholders = {"This is a Notification.", "This is also a notification."};

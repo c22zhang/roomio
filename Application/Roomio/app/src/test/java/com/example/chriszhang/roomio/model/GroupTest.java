@@ -82,20 +82,6 @@ public class GroupTest {
     }
 
     @Test
-    public void testMaybeGetMember() {
-        assert(group.maybeGetMember(user).equals(Optional.empty()));
-        group.addMember(user);
-        assert(group.maybeGetMember(user).equals(Optional.of(user)));
-    }
-
-    @Test
-    public void testMaybeGetTask() {
-        assert(group.maybeGetTask(task).equals(Optional.empty()));
-        group.addTask(task);
-        assert(group.maybeGetTask(task).equals(Optional.of(task)));
-    }
-
-    @Test
     public void testToJson() throws Exception {
         group.addMember(user);
         group.addMessage(message);

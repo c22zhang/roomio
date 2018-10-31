@@ -15,7 +15,10 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
-public class GroupChatActivity extends ParentDrawerActivity {
+/**
+ * Activity for the Group Chat
+ */
+public final class GroupChatActivity extends ParentDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

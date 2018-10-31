@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+/**
+ * Represents a Room.io user.
+ */
 public final class User implements Jsonable {
 
     private final String userId, username, name, email, password;
@@ -19,6 +22,16 @@ public final class User implements Jsonable {
     private List<Tab> myTabs = new ArrayList<>();
     private Optional<String> adminedGroupId, householdGroupId;
 
+    /**
+     * General constructor for user
+     * @param userId unique identifier for user
+     * @param username unique username for user
+     * @param name the user's actual name
+     * @param email the user's email
+     * @param password the user's password
+     * @param adminedGroupId the groupId of the group this user admins, if it exists
+     * @param householdGroupId the groupId of the household this user belongs to
+     */
     public User(
             String userId,
             String username,
@@ -37,6 +50,7 @@ public final class User implements Jsonable {
 
     }
 
+    // assorted getters/setters
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
     public String getName() { return name; }
@@ -50,42 +64,50 @@ public final class User implements Jsonable {
     public List<Notification> getNotifications() { return notifications; }
     public List<Tab> getMyTabs() { return myTabs; }
 
+    /**
+     * Adds the notification to the User
+     * @param notification the notification to be added
+     */
     public void addNotification(Notification notification){
         this.notifications.add(notification);
     }
 
+    /**
+     * Adds the tab to the User
+     * @param tab the tab to be added
+     */
     public void addTab(Tab tab){
         this.myTabs.add(tab);
     }
 
+    /**
+     * deletes the notification from the User
+     * @param notification the notification to be deleted
+     */
     public void deleteNotification(Notification notification){
         if(notifications.contains(notification)){
             notifications.remove(notification);
         }
     }
 
+    /**
+     * deletes the tab from the user
+     * @param tab the tab to be deleted
+     */
     public void deleteTab(Tab tab){
         if(myTabs.contains(tab)){
             myTabs.remove(tab);
         }
     }
 
-    public Optional<Notification> maybeGetNotification(Notification notification){
-        Optional<Notification> maybeNote = Optional.empty();
-        return (notifications.contains(notification))?
-                Optional.of(notifications.get(notifications.indexOf(notification))) :
-                maybeNote;
-    }
+    //TODO: implement this
 
-    public Optional<Tab> maybeGetTab(Tab tab){
-        Optional<Tab> maybeTab = Optional.empty();
-        return (myTabs.contains(tab))?
-                Optional.of(myTabs.get(myTabs.indexOf(tab))) :
-                maybeTab;
-    }
-
-    //TODO
-    public void editTab(Tab tab){}
+    /**
+     * Edits the tab with tabId with the fields in tab if it exists
+     * @param tabId the id of the tab to be edited
+     * @param tab where to get the updated fields from
+     */
+    public void editTab(String tabId, Tab tab){}
 
     @Override
     public String toString() {
@@ -97,7 +119,10 @@ public final class User implements Jsonable {
         }
     }
 
-
+    /**
+     * @return JSON object representation of the User
+     * @throws JSONException if JSON parsing goes wrong
+     */
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
@@ -136,6 +161,13 @@ public final class User implements Jsonable {
         return array;
     }
 
+    /**
+     * Convenience method for instantiating a User from a JSON object
+     * @param obj a JSON object representing a User
+     * @return a new User object with the fields in the JSON object
+     * @throws JsonToObjectException if required fields are missing
+     * @throws JSONException if something goes wrong during JSON parsing
+     */
     public static User from(JSONObject obj) throws JsonToObjectException, JSONException {
         User user;
         Set<String> required =

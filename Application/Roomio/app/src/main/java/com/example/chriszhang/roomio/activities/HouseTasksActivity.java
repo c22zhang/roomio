@@ -15,7 +15,10 @@ import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
 
-public class HouseTasksActivity extends ParentDrawerActivity {
+/**
+ * Activity containing the list of tasks for the household
+ */
+public final class HouseTasksActivity extends ParentDrawerActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -19,6 +19,11 @@ import java.util.logging.Logger;
  */
 public class Utils {
 
+    /**
+     * Adds required fields for JSON parsing to a Set
+     * @param required 1...n fields that are required
+     * @return a set containing all the required fields
+     */
     public static HashSet<String> requiredFieldSet(String... required){
         HashSet<String> output = new HashSet<>();
         for(String s : required){
@@ -27,6 +32,12 @@ public class Utils {
         return output;
     }
 
+    /**
+     * Checks if a JSONobject contains the required fields
+     * @param obj the JSONObject to check
+     * @param requiredFields the required fields in a Set
+     * @return true if the object contains all of the fields, false otherwise
+     */
     public static boolean containsRequiredFields(JSONObject obj, Set<String> requiredFields){
         for(String field: requiredFields){
             if(!obj.has(field)){

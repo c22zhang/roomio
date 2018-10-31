@@ -22,12 +22,19 @@ public final class Group implements Jsonable {
     private List<Task> tasks = new ArrayList<>();
     private List<Message> groupChatMessages = new ArrayList<>();
 
+    /**
+     * General constructor for Group
+     * @param groupId unique identifier for a group
+     * @param groupAdminUserId the user id of the creator/administrator of this group
+     * @param groupName the name of the group
+     */
     public Group(String groupId, String groupAdminUserId, String groupName){
         this.groupId = groupId;
         this.groupAdminUserId = groupAdminUserId;
         this.groupName = groupName;
     }
 
+    // assorted getters/setters
     public String getGroupId() { return groupId; }
     public String getGroupAdminUserId() { return groupAdminUserId; }
     public String getGroupName() { return groupName; }
@@ -36,50 +43,70 @@ public final class Group implements Jsonable {
     public List<Task> getTasks() { return tasks; }
     public List<Message> getGroupChatMessages() { return groupChatMessages; }
 
+    /**
+     * Adds a member to the group
+     * @param member the member to be added
+     */
     public void addMember(User member) {
         members.add(member);
     }
 
+    /**
+     * Adds a task to the group
+     * @param task the task to be added
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
 
+    /**
+     * Adds a message to the group's chat
+     * @param message message to be added
+     */
     public void addMessage(Message message) {
         groupChatMessages.add(message);
     }
 
+    /**
+     * removes a member from the group
+     * @param member member to be removed
+     */
     public void removeMember(User member) {
         if(members.contains(member)){
             members.remove(member);
         }
     }
 
+    /**
+     * removes a task from the task list
+     * @param task the task to be removed
+     */
     public void deleteTask(Task task) {
         if(tasks.contains(task)){
             tasks.remove(task);
         }
     }
 
-    public Optional<User> maybeGetMember(User member) {
-        Optional<User> maybeUser = Optional.empty();
-        return (members.contains(member))?
-                Optional.of(members.get(members.indexOf(member))):
-                maybeUser;
-    }
-
-    public Optional<Task> maybeGetTask(Task task) {
-        Optional<Task> maybeTask = Optional.empty();
-        return (tasks.contains(task))?
-                Optional.of(tasks.get(tasks.indexOf(task))) :
-                maybeTask;
-    }
-
     //TODO: implement these if necessary
-    public void updateMember(User member) {}
 
-    public void updateTask(Task task) {}
+    /**
+     * Will update the member with memberId in the Group with the fields in member if it exists.
+     * @param memberId the id of the member to be updated
+     * @param member the member to get fields from
+     */
+    public void updateMember(String memberId, User member) {}
+
+    /**
+     * Will update the task with taskId in the Group with the fields in task if it exists
+     * @param taskId the id of the task to be updated
+     * @param task the task to get fields from
+     */
+    public void updateTask(String taskId, Task task) {}
 
 
+    /**
+     * @return a JSON string of the object
+     */
     @Override
     public String toString() {
         try{
@@ -90,6 +117,11 @@ public final class Group implements Jsonable {
         }
     }
 
+    /**
+     *
+     * @return JSONObject representation of the group
+     * @throws JSONException if JSON parsing goes wrong
+     */
     @Override
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
@@ -104,6 +136,13 @@ public final class Group implements Jsonable {
         return object;
     }
 
+    /**
+     * Convenience method for instantiating a Group from a JSON object
+     * @param obj JSON object representing a group
+     * @return a new Group containing fields from the JSON object
+     * @throws JSONException if JSON parsing goes wrong
+     * @throws JsonToObjectException if required fields are missing from obj
+     */
     public static Group from(JSONObject obj) throws JSONException, JsonToObjectException {
         Group group;
         Set<String> required =
