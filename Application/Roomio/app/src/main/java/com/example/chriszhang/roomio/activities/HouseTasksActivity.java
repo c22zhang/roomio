@@ -12,13 +12,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.adapters.TaskAdapter;
+import com.example.chriszhang.roomio.model.Task;
 
 /**
  * Activity containing the list of tasks for the household
  */
 public final class HouseTasksActivity extends ParentDrawerActivity {
+
+    //TODO: replace with actual stuff once that's working
+    Task[] houseTasks = {
+            new Task(
+                    "123",
+                    "Bob",
+                    "Alice",
+                    "Hello world",
+                    "Who knows",
+                    "12/12")};
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +58,9 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TaskAdapter adapter = new TaskAdapter(this, houseTasks);
+        ListView listView = findViewById(R.id.taskList);
+        listView.setAdapter(adapter);
     }
 }

@@ -34,4 +34,6 @@
     <string name="title_activity_house_tasks">HouseTasksActivity</string>
     <string name="title_activity_group_chat">GroupChatActivity</string>
     <string name="title_activity_parent_drawer">ParentDrawerActivity</string>
+    <string name="assignee">Assignee</string>
+    <string name="assigner">Assigner</string>
 </resources>
