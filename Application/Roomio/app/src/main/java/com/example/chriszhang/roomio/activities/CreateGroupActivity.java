@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.example.chriszhang.roomio.R;
 
@@ -20,21 +23,16 @@ import com.example.chriszhang.roomio.R;
  */
 public final class CreateGroupActivity extends ParentDrawerActivity{
 
+    EditText addEditText, nameEditText;
+    Spinner deleteSpinner;
+    Button saveButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_group);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -44,5 +42,10 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        saveButton = findViewById(R.id.saveButton);
+        addEditText = findViewById(R.id.addEditText);
+        nameEditText = findViewById(R.id.groupNameEdit);
+        deleteSpinner = findViewById(R.id.spinner);
     }
 }
