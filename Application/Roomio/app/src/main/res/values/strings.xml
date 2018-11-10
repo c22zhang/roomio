@@ -49,4 +49,13 @@
     <string name="message_text">Message text</string>
     <string name="gc_username">Username</string>
     <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="task_name">Task Name</string>
+    <string name="enter_task_description">Enter task description:</string>
+    <string name="save_task">Save Task</string>
+    <string name="tab_name">Tab Name</string>
+    <string name="reason">Reason</string>
+    <string name="save_tab">Save Tab</string>
+    <string name="enter_reason_for_tab">Enter reason for tab:</string>
+    <string name="amount">Amount</string>
 </resources>

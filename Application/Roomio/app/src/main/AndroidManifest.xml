@@ -40,7 +40,9 @@
         <activity
             android:name=".activities.ParentDrawerActivity"
             android:label="@string/title_activity_parent_drawer"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".activities.AddTabActivity" />
+        <activity android:name=".activities.AddTaskActivity"></activity>
     </application>
 
 </manifest>

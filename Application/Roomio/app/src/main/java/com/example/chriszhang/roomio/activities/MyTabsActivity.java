@@ -1,5 +1,6 @@
 package com.example.chriszhang.roomio.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -45,8 +46,7 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                addButtonTransition();
             }
         });
 
@@ -62,5 +62,10 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         TabAdapter adapter = new TabAdapter(this, tabs);
         listView = findViewById(R.id.tabList);
         listView.setAdapter(adapter);
+    }
+
+    private void addButtonTransition() {
+        Intent intent = new Intent(this, AddTabActivity.class);
+        startActivity(intent);
     }
 }
