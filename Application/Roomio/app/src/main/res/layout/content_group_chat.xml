@@ -9,6 +9,7 @@
     tools:showIn="@layout/app_bar_group_chat">
 
     <ListView
+        android:id="@+id/groupChatList"
         android:layout_width="395dp"
         android:layout_height="523dp"
         android:layout_marginEnd="8dp"

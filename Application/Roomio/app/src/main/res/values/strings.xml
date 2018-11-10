@@ -46,4 +46,7 @@
     <string name="save_changes">Save changes</string>
     <string name="send">Send</string>
     <string name="enter_message">Enter Message</string>
+    <string name="message_text">Message text</string>
+    <string name="gc_username">Username</string>
+    <string name="date">Date</string>
 </resources>
