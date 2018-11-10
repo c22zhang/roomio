@@ -36,4 +36,6 @@
     <string name="title_activity_parent_drawer">ParentDrawerActivity</string>
     <string name="assignee">Assignee</string>
     <string name="assigner">Assigner</string>
+    <string name="default_money">$999.99</string>
+    <string name="name_of_tab">Name of Tab</string>
 </resources>

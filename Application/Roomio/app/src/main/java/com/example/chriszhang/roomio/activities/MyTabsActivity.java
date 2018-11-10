@@ -12,13 +12,27 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.adapters.TabAdapter;
+import com.example.chriszhang.roomio.model.Tab;
 
 /**
  * Activity for displaying your tabs
  */
 public final class MyTabsActivity extends ParentDrawerActivity {
+
+    Tab[] tabs = {
+            new Tab(
+                    "asdf",
+                    "Food for thought",
+                    "no reason needed",
+                    "Alice",
+                    "Bob",
+                    "12/12",
+                    12.33)};
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,5 +58,9 @@ public final class MyTabsActivity extends ParentDrawerActivity {
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        TabAdapter adapter = new TabAdapter(this, tabs);
+        listView = findViewById(R.id.tabList);
+        listView.setAdapter(adapter);
     }
 }
