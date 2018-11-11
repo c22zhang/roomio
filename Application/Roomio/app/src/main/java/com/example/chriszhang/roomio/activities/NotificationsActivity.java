@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
@@ -48,5 +49,17 @@ public final class NotificationsActivity extends ParentDrawerActivity {
 
         listView = findViewById(R.id.personalNotificationList);
         listView.setAdapter(notificationAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = listView.getItemAtPosition(position);
+                getDetails(item);
+            }
+        });
+    }
+
+    private void getDetails(Object item){
+        Intent intent = new Intent(this, NotificationDetailActivity.class);
+        startActivity(intent);
     }
 }

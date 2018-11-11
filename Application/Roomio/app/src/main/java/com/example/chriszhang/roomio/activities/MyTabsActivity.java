@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
@@ -62,10 +63,23 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         TabAdapter adapter = new TabAdapter(this, tabs);
         listView = findViewById(R.id.tabList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = listView.getItemAtPosition(position);
+                getDetails(item);
+            }
+        });
     }
 
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTabActivity.class);
         startActivity(intent);
     }
+
+    private void getDetails(Object item) {
+        Intent intent = new Intent(this, TabDetailActivity.class);
+        startActivity(intent);
+    }
+
 }

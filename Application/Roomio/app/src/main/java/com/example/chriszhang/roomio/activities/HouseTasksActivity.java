@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
@@ -60,12 +61,24 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         TaskAdapter adapter = new TaskAdapter(this, houseTasks);
-        ListView listView = findViewById(R.id.taskList);
+        final ListView listView = findViewById(R.id.taskList);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Object item = listView.getItemAtPosition(position);
+                getDetails(item);
+            }
+        });
     }
 
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTaskActivity.class);
+        startActivity(intent);
+    }
+
+    private void getDetails(Object item){
+        Intent intent = new Intent(this, TaskDetailActivity.class);
         startActivity(intent);
     }
 }
