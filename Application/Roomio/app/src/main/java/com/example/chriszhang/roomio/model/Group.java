@@ -7,6 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -21,6 +22,7 @@ public final class Group implements Jsonable {
     private List<User> members = new ArrayList<>();
     private List<Task> tasks = new ArrayList<>();
     private List<Message> groupChatMessages = new ArrayList<>();
+    private HashMap<String, User> idsMap = new HashMap<>();
 
     /**
      * General constructor for Group
@@ -43,12 +45,18 @@ public final class Group implements Jsonable {
     public List<Task> getTasks() { return tasks; }
     public List<Message> getGroupChatMessages() { return groupChatMessages; }
 
+    public Optional<User> getMemberFromId(String id){
+        return (idsMap.containsKey(id))?
+                Optional.of(idsMap.get(id)) : Optional.<User>empty();
+    }
+
     /**
      * Adds a member to the group
      * @param member the member to be added
      */
     public void addMember(User member) {
         members.add(member);
+        idsMap.put(member.getUserId(), member);
     }
 
     /**

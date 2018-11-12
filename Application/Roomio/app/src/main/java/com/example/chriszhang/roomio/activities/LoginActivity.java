@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 import java.util.Optional;
 
@@ -19,6 +21,16 @@ public final class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private Button signup, signin;
     private Optional<String> usernameText, passwordText;
+
+    //TODO: FOR TEST PURPOSES ONLY, REPLACE ONCE SERVER WORKS
+    private static final User user =
+            new User("ABC",
+                    "Chris Zhang",
+                    "Chris Zhang",
+                    "abc@123.net",
+                    "asdf",
+                    Optional.of("123"),
+                    Optional.of("123"));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,7 @@ public final class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                State.createState(user);
                 transition(NotificationsActivity.class);
             }
         });

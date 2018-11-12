@@ -11,15 +11,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.model.Notification;
 
 public class PersonalNotificationAdapter extends ArrayAdapter {
 
     private final Activity context;
 
-    private String[] notificationTitles;
+    private Notification[] notificationTitles;
 
 
-    public PersonalNotificationAdapter(@NonNull Activity context, String[] notificationTitles) {
+    public PersonalNotificationAdapter(@NonNull Activity context, Notification[] notificationTitles) {
         super(context, R.layout.personal_notification_row, notificationTitles);
         this.context = context;
         this.notificationTitles = notificationTitles;
@@ -33,7 +34,7 @@ public class PersonalNotificationAdapter extends ArrayAdapter {
         View row = inflater
                 .inflate(R.layout.personal_notification_row, null, true);
         TextView notificationTitle = row.findViewById(R.id.notificationText);
-        notificationTitle.setText(notificationTitles[position]);
+        notificationTitle.setText(notificationTitles[position].getMessage());
         return row;
     }
 }

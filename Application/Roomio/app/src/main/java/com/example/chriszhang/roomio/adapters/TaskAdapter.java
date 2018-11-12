@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Task;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 public class TaskAdapter extends ArrayAdapter {
 
@@ -35,9 +37,12 @@ public class TaskAdapter extends ArrayAdapter {
         TextView assigner = row.findViewById(R.id.assignerText);
         taskName.setText(tasks[position].getTaskName());
 
-        //TODO: resolve to username instead of userID, ok for now as placeholder
-        assignee.setText(tasks[position].getAssigneeUserId());
-        assigner.setText(tasks[position].getAssignerUserId());
+        User taskAssignee =
+                State.getGroup().getMemberFromId(tasks[position].getAssigneeUserId()).get();
+        User taskAssigner =
+                State.getGroup().getMemberFromId(tasks[position].getAssignerUserId()).get();
+        assignee.setText(taskAssignee.getName());
+        assigner.setText(taskAssigner.getName());
         return row;
     }
 }

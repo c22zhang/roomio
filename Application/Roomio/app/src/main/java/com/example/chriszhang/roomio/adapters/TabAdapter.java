@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Tab;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 public class TabAdapter extends ArrayAdapter {
 
@@ -39,9 +41,10 @@ public class TabAdapter extends ArrayAdapter {
         amount.setText("$" + currTab.getAmount().toString());
         tabName.setText(currTab.getTabName());
 
-        //TODO make this resolve to user name and not userId
-        assignee.setText(currTab.getAssigneeUserId());
-        assigner.setText(currTab.getAssignerUserId());
+        User tabAssignee = State.getGroup().getMemberFromId(currTab.getAssigneeUserId()).get();
+        User tabAssigner = State.getGroup().getMemberFromId(currTab.getAssignerUserId()).get();
+        assignee.setText(tabAssignee.getName());
+        assigner.setText(tabAssigner.getName());
         return row;
     }
 }

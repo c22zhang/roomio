@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Message;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 public class GroupChatAdapter extends ArrayAdapter {
 
@@ -36,8 +38,9 @@ public class GroupChatAdapter extends ArrayAdapter {
         TextView messageText = row.findViewById(R.id.messageText);
         Message currentMessage = messages[position];
         dateText.setText(currentMessage.getDateSent());
-        //TODO: swap for actual username
-        nameText.setText(currentMessage.getSenderId());
+        //TODO: make this safer
+        User sender = State.getGroup().getMemberFromId(currentMessage.getSenderId()).get();
+        nameText.setText(sender.getName());
         messageText.setText(currentMessage.getMessageContents());
         return row;
     }

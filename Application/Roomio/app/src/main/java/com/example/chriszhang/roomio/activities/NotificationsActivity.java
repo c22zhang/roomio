@@ -18,6 +18,10 @@ import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.PersonalNotificationAdapter;
+import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Notification;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 /**
  * Activity for displaying personal notifications
@@ -25,27 +29,31 @@ import com.example.chriszhang.roomio.adapters.PersonalNotificationAdapter;
 public final class NotificationsActivity extends ParentDrawerActivity {
 
     //TODO: Replace with actual user data once other stuff is completed
-    String[] placeholders = {"This is a Notification.", "This is also a notification."};
+    Notification[] notifications;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer =  findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        User currentUser = State.getCurrentUser();
+        notifications = (Notification[]) currentUser.getNotifications().toArray();
+
         PersonalNotificationAdapter notificationAdapter =
-                new PersonalNotificationAdapter(this, placeholders);
+                new PersonalNotificationAdapter(this, notifications);
 
         listView = findViewById(R.id.personalNotificationList);
         listView.setAdapter(notificationAdapter);
