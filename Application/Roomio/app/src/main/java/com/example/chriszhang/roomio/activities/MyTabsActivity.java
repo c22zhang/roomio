@@ -19,21 +19,15 @@ import android.widget.ListView;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.TabAdapter;
 import com.example.chriszhang.roomio.model.Tab;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
 
 /**
  * Activity for displaying your tabs
  */
 public final class MyTabsActivity extends ParentDrawerActivity {
 
-    Tab[] tabs = {
-            new Tab(
-                    "asdf",
-                    "Food for thought",
-                    "no reason needed",
-                    "Alice",
-                    "Bob",
-                    "12/12",
-                    12.33)};
+    Tab[] tabs;
     ListView listView;
 
     @Override
@@ -60,6 +54,8 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        User currentUser = State.getCurrentUser();
+        tabs = (Tab[]) currentUser.getMyTabs().toArray();
         TabAdapter adapter = new TabAdapter(this, tabs);
         listView = findViewById(R.id.tabList);
         listView.setAdapter(adapter);

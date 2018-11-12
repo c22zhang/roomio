@@ -18,23 +18,16 @@ import android.widget.ListView;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.TaskAdapter;
+import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.Task;
+import com.example.chriszhang.roomio.state.State;
 
 /**
  * Activity containing the list of tasks for the household
  */
 public final class HouseTasksActivity extends ParentDrawerActivity {
 
-    //TODO: replace with actual stuff once that's working
-    Task[] houseTasks = {
-            new Task(
-                    "123",
-                    "Bob",
-                    "Alice",
-                    "Hello world",
-                    "Who knows",
-                    "12/12")};
-    ListView listView;
+    Task[] houseTasks;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +53,20 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        TaskAdapter adapter = new TaskAdapter(this, houseTasks);
-        final ListView listView = findViewById(R.id.taskList);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Object item = listView.getItemAtPosition(position);
-                getDetails(item);
-            }
-        });
+        if(State.hasGroup()){
+            Group group = State.getGroup();
+            houseTasks = (Task[]) group.getTasks().toArray();
+            TaskAdapter adapter = new TaskAdapter(this, houseTasks);
+            final ListView listView = findViewById(R.id.taskList);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Object item = listView.getItemAtPosition(position);
+                    getDetails(item);
+                }
+            });
+        }
     }
 
     private void addButtonTransition() {
