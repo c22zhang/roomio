@@ -15,6 +15,8 @@ import com.example.chriszhang.roomio.model.Message;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
+import java.util.Optional;
+
 public class GroupChatAdapter extends ArrayAdapter {
 
     private final Activity context;
@@ -39,9 +41,15 @@ public class GroupChatAdapter extends ArrayAdapter {
         Message currentMessage = messages[position];
         dateText.setText(currentMessage.getDateSent());
         //TODO: make this safer
-        User sender = State.getGroup().getMemberFromId(currentMessage.getSenderId()).get();
-        nameText.setText(sender.getName());
-        messageText.setText(currentMessage.getMessageContents());
+        if(State.hasGroup()){
+            Optional<User> sender = State.getGroup().getMemberFromId(currentMessage.getSenderId());
+            if(sender.isPresent()){
+                nameText.setText(sender.get().getName());
+            } else {
+                nameText.setText(R.string.no_sender);
+            }
+            messageText.setText(currentMessage.getMessageContents());
+        }
         return row;
     }
 }

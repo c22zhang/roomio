@@ -55,7 +55,8 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         User currentUser = State.getCurrentUser();
-        tabs = (Tab[]) currentUser.getMyTabs().toArray();
+        tabs = currentUser.getMyTabs().toArray(
+                new Tab[currentUser.getMyTabs().size()]);
         TabAdapter adapter = new TabAdapter(this, tabs);
         listView = findViewById(R.id.tabList);
         listView.setAdapter(adapter);

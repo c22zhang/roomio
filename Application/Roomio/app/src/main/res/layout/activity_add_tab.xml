@@ -56,7 +56,6 @@
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/tab_name"
         app:layout_constraintBottom_toBottomOf="@+id/tabNameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tabNameText"
@@ -70,7 +69,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/assignee"
         app:layout_constraintBottom_toBottomOf="@+id/tabAssigneeText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/tabAssigneeText"
@@ -122,7 +120,6 @@
         android:layout_marginEnd="28dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/amount"
         app:layout_constraintBottom_toBottomOf="@+id/amountTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/amountTextView" />

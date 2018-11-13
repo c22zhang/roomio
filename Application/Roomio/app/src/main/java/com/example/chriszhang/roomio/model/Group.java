@@ -55,6 +55,7 @@ public final class Group implements Jsonable {
      * @param member the member to be added
      */
     public void addMember(User member) {
+        member.setHouseholdGroupId(Optional.of(groupId));
         members.add(member);
         idsMap.put(member.getUserId(), member);
     }

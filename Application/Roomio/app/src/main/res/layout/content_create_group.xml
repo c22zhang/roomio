@@ -16,7 +16,6 @@
         android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/enter_a_username"
         app:layout_constraintEnd_toEndOf="@+id/deleteRoommates"
         app:layout_constraintStart_toStartOf="@+id/deleteRoommates"
         app:layout_constraintTop_toBottomOf="@+id/addRoommates" />
@@ -62,7 +61,6 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/enter_a_new_group_name"
         app:layout_constraintEnd_toEndOf="@+id/addRoommates"
         app:layout_constraintStart_toStartOf="@+id/addRoommates"
         app:layout_constraintTop_toBottomOf="@+id/groupName" />

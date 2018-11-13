@@ -25,12 +25,12 @@ public final class LoginActivity extends AppCompatActivity {
     //TODO: FOR TEST PURPOSES ONLY, REPLACE ONCE SERVER WORKS
     private static final User user =
             new User("ABC",
-                    "Chris Zhang",
-                    "Chris Zhang",
+                    "Test test",
+                    "Test Test",
                     "abc@123.net",
                     "asdf",
-                    Optional.of("123"),
-                    Optional.of("123"));
+                    Optional.<String>empty(),
+                    Optional.<String>empty());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

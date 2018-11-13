@@ -79,12 +79,16 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
                         Snackbar.LENGTH_LONG).show();
                 return;
             }
+
             Group group = new Group("",
                     State.getCurrentUser().getUserId(),
                     groupName);
-            State.setGroup(group);
-            //TODO: replace hardcoded users once server stuff is working
 
+            State.getCurrentUser().setAdminedGroupId(Optional.of(group.getGroupId()));
+            group.addMember(State.getCurrentUser());
+
+            //TODO: replace hardcoded users once server stuff is working
+            //==============================================================
             group.addMember(new User(
                     "asdf",
                     "ChrisZhang",
@@ -101,6 +105,8 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
                     "asdf",
                     Optional.<String>empty(),
                     Optional.<String>empty()));
+
+            State.setGroup(group);
         }
     }
 

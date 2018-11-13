@@ -58,4 +58,5 @@
     <string name="save_tab">Save Tab</string>
     <string name="enter_reason_for_tab">Enter reason for tab:</string>
     <string name="amount">Amount</string>
+    <string name="no_sender">Could not determine sender.</string>
 </resources>

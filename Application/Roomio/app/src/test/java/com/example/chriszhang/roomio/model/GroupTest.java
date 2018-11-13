@@ -103,7 +103,7 @@ public class GroupTest {
         assert(user.get("name").equals("Testy McTesterson"));
         assert(user.get("email").equals("test@gmail.com"));
         assert(user.get("admined_group_id").equals("1234"));
-        assert(user.get("member_group_id").equals("2345"));
+        assert(user.get("member_group_id").equals("asdf"));
 
         assert(message.get("message_id").equals("addddsa"));
         assert(message.get("message_contents").equals("Hello world"));
@@ -134,7 +134,7 @@ public class GroupTest {
         assert(output.contains("\"name\":\"Testy McTesterson\""));
         assert(output.contains("\"email\":\"test@gmail.com\""));
         assert(output.contains("\"admined_group_id\":\"1234\""));
-        assert(output.contains("\"member_group_id\":\"2345\""));
+        assert(output.contains("\"member_group_id\":\"asdf\""));
 
         assert(output.contains("\"task_name\":\"trash\""));
         assert(output.contains("\"assignee\":\"bob\""));

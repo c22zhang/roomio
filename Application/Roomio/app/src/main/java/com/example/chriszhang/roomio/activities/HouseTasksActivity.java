@@ -55,7 +55,8 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
 
         if(State.hasGroup()){
             Group group = State.getGroup();
-            houseTasks = (Task[]) group.getTasks().toArray();
+            houseTasks = group.getTasks().toArray(
+                    new Task[group.getTasks().size()]);
             TaskAdapter adapter = new TaskAdapter(this, houseTasks);
             final ListView listView = findViewById(R.id.taskList);
             listView.setAdapter(adapter);
