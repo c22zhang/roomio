@@ -223,4 +223,16 @@ public final class User implements Jsonable {
         return user;
     }
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof User){
+            User other = (User) obj;
+            return userId == other.getUserId() &&
+                    username == other.getUsername() &&
+                    email == other.getEmail() &&
+                    name == other.getName();
+        }
+        return false;
+    }
 }

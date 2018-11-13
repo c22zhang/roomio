@@ -40,7 +40,6 @@ public class GroupChatAdapter extends ArrayAdapter {
         TextView messageText = row.findViewById(R.id.messageText);
         Message currentMessage = messages[position];
         dateText.setText(currentMessage.getDateSent());
-        //TODO: make this safer
         if(State.hasGroup()){
             Optional<User> sender = State.getGroup().getMemberFromId(currentMessage.getSenderId());
             if(sender.isPresent()){
