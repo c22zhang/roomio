@@ -36,6 +36,10 @@ public class State {
         return stateInstance;
     }
 
+    public static void setGroup (Group g){
+        stateInstance.group = g;
+    }
+
     /**
      * Should only really have one state so make it singleton
      * @param currentUser the current client/user
