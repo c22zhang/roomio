@@ -1,6 +1,7 @@
 package com.example.chriszhang.roomio.activities;
 
 import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,17 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Task;
+import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.State;
+import com.example.chriszhang.roomio.utils.Utils;
 
+import java.util.Optional;
+
+/**
+ * Activity for adding tasks to the task list
+ */
 public class AddTaskActivity extends AppCompatActivity {
 
     Button saveTaskButton;
@@ -26,13 +37,56 @@ public class AddTaskActivity extends AppCompatActivity {
         saveTaskButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveTask();
+                Intent intent = new Intent();
+                int result = saveTask();
+                if(result == RESULT_OK) {
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }
 
-    private void saveTask(){
-        Intent intent = new Intent(this, HouseTasksActivity.class);
-        startActivity(intent);
+    private int saveTask(){
+        if(taskDescriptionEditText != null &&
+                taskAssigneeEditText != null &&
+                taskNameEditText != null){
+            if(State.hasGroup()){
+                Group group = State.getGroup();
+                User current = State.getCurrentUser();
+                Optional<User> assignee =
+                        group.getMemberFromUsername(taskAssigneeEditText.getText().toString());
+                return createTask(assignee, current, group);
+            } else {
+                Snackbar.make(getWindow().getDecorView().getRootView(),
+                        "You are not currently in a group.",
+                        Snackbar.LENGTH_LONG).show();
+                return RESULT_CANCELED;
+            }
+        } else {
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "All fields of the form must be filled!",
+                    Snackbar.LENGTH_LONG).show();
+            return RESULT_CANCELED;
+        }
+    }
+
+    private int createTask(Optional<User> assignee, User current, Group group){
+        if(assignee.isPresent()){
+            Task task = new Task(
+                    "",
+                    assignee.get().getUserId(),
+                    current.getUserId(),
+                    taskNameEditText.getText().toString(),
+                    taskDescriptionEditText.getText().toString(),
+                    Utils.getCurrentDate());
+            group.addTask(task);
+            return RESULT_OK;
+        } else {
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Could not find user associated with the assignee.",
+                    Snackbar.LENGTH_LONG).show();
+            return RESULT_CANCELED;
+        }
     }
 }

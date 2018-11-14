@@ -21,6 +21,7 @@ import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.TaskAdapter;
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.Task;
+import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 public final class HouseTasksActivity extends ParentDrawerActivity {
 
     ArrayList<Task> houseTasks = new ArrayList<>();
+    TaskAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +57,13 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        adapter = new TaskAdapter(this, houseTasks);
+        final ListView listView = findViewById(R.id.taskList);
+        listView.setAdapter(adapter);
 
         if(State.hasGroup()){
             Group group = State.getGroup();
             houseTasks.addAll(group.getTasks());
-            TaskAdapter adapter = new TaskAdapter(this, houseTasks);
-            final ListView listView = findViewById(R.id.taskList);
-            listView.setAdapter(adapter);
             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -75,15 +77,22 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK) {
+                Group group = State.getGroup();
+                houseTasks.addAll(group.getTasks());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTaskActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     private void getDetails(Object item){
         Intent intent = new Intent(this, TaskDetailActivity.class);
-        startActivityForResult(intent, 1);
+        startActivity(intent);
     }
 }
