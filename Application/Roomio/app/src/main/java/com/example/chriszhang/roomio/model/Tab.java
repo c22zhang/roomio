@@ -20,7 +20,6 @@ public final class Tab implements Jsonable {
     /**
      * General constructor
      * @param tabId Unique identifier for the tab
-     * @param tabName The name of the tab
      * @param reason Reason for owing money
      * @param assigneeUserId Person owing money to
      * @param assignerUserId Person owed money
@@ -29,7 +28,6 @@ public final class Tab implements Jsonable {
      */
     public Tab(
             String tabId,
-            String tabName,
             String reason,
             String assigneeUserId,
             String assignerUserId,
@@ -49,7 +47,6 @@ public final class Tab implements Jsonable {
     public String getAssignerUserId() { return assignerUserId; }
     public String getAssigneeUserId() { return assigneeUserId; }
     public String getDateAssigned() { return dateAssigned; }
-    public String getTabName() { return tabName; }
     public void setTabName(String tabName) { this.tabName = tabName; }
     public String getReason() { return reason; }
     public void setReason(String reason) { this.reason = reason; }
@@ -100,7 +97,6 @@ public final class Tab implements Jsonable {
         Set<String> requiredFields =
                 Utils.requiredFieldSet(
                         "tab_id",
-                        "tab_name",
                         "reason",
                         "assignee",
                         "assigner",
@@ -109,7 +105,6 @@ public final class Tab implements Jsonable {
         if(Utils.containsRequiredFields(obj, requiredFields)){
             return new Tab(
                     (String) obj.get("tab_id"),
-                    (String) obj.get("tab_name"),
                     (String) obj.get("reason"),
                     (String) obj.get("assignee"),
                     (String) obj.get("assigner"),

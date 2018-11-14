@@ -2,6 +2,7 @@ package com.example.chriszhang.roomio.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -70,6 +71,11 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTaskActivity.class);
         startActivity(intent);
@@ -77,6 +83,6 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
 
     private void getDetails(Object item){
         Intent intent = new Intent(this, TaskDetailActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 }

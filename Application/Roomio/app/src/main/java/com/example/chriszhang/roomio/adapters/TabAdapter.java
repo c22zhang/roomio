@@ -39,7 +39,7 @@ public class TabAdapter extends ArrayAdapter {
         TextView assigner = row.findViewById(R.id.tabAssigner);
         Tab currTab = tabs[position];
         amount.setText("$" + currTab.getAmount().toString());
-        tabName.setText(currTab.getTabName());
+        tabName.setText(currTab.getReason());
 
         User tabAssignee = State.getGroup().getMemberFromId(currTab.getAssigneeUserId()).get();
         User tabAssigner = State.getGroup().getMemberFromId(currTab.getAssignerUserId()).get();

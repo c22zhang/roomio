@@ -23,6 +23,7 @@ public final class Group implements Jsonable {
     private List<Task> tasks = new ArrayList<>();
     private List<Message> groupChatMessages = new ArrayList<>();
     private HashMap<String, User> idsMap = new HashMap<>();
+    private HashMap<User, String> userToIdMap = new HashMap<>();
 
     /**
      * General constructor for Group
@@ -58,6 +59,7 @@ public final class Group implements Jsonable {
         member.setHouseholdGroupId(Optional.of(groupId));
         members.add(member);
         idsMap.put(member.getUserId(), member);
+        userToIdMap.put(member, member.getUserId());
     }
 
     /**
@@ -84,6 +86,14 @@ public final class Group implements Jsonable {
         if(members.contains(member)){
             members.remove(member);
         }
+    }
+
+    /**
+     * @param member a user to get an id from
+     * @return the id of the provided user
+     */
+    public String getId(User member){
+        return userToIdMap.get(member);
     }
 
     /**
@@ -144,6 +154,7 @@ public final class Group implements Jsonable {
 
         return object;
     }
+
 
     /**
      * Convenience method for instantiating a Group from a JSON object

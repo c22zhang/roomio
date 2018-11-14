@@ -7,7 +7,6 @@ public class TabTest {
 
     Tab tab = new Tab(
             "asdf",
-            "food",
             "your food",
             "bob",
             "joe",
@@ -17,7 +16,6 @@ public class TabTest {
     @Test
     public void testGetters() {
         assert(tab.getTabId().equals("asdf"));
-        assert(tab.getTabName().equals("food"));
         assert(tab.getReason().equals("your food"));
         assert(tab.getAssigneeUserId().equals("bob"));
         assert(tab.getAssignerUserId().equals("joe"));
@@ -28,11 +26,9 @@ public class TabTest {
     @Test
     public void testSetters() {
         Tab copy = tab;
-        copy.setTabName("rent");
         copy.setReason("pay ur rent dude");
         copy.setAmount(5000.00);
         copy.setAssigneeUserId("asdf");
-        assert(copy.getTabName().equals("rent"));
         assert(copy.getReason().equals("pay ur rent dude"));
         assert(copy.getAmount().equals(5000.00));
         assert(copy.getAssigneeUserId().equals("asdf"));
@@ -42,7 +38,6 @@ public class TabTest {
     public void testToJson() throws Exception {
         JSONObject obj = tab.toJson();
         assert(obj.get("tab_id").equals("asdf"));
-        assert(obj.get("tab_name").equals("food"));
         assert(obj.get("reason").equals("your food"));
         assert(obj.get("assignee").equals("bob"));
         assert(obj.get("assigner").equals("joe"));
@@ -54,7 +49,6 @@ public class TabTest {
     public void testToString() throws Exception {
         String output = tab.toString();
         assert(output.contains("\"tab_id\":\"asdf\""));
-        assert(output.contains("\"tab_name\":\"food\""));
         assert(output.contains("\"reason\":\"your food\""));
         assert(output.contains("\"assignee\":\"bob\""));
         assert(output.contains("\"assigner\":\"joe\""));
@@ -67,7 +61,6 @@ public class TabTest {
         JSONObject obj = tab.toJson();
         Tab myTab = Tab.from(obj);
         assert(myTab.getTabId().equals("asdf"));
-        assert(myTab.getTabName().equals("food"));
         assert(myTab.getReason().equals("your food"));
         assert(myTab.getAssigneeUserId().equals("bob"));
         assert(myTab.getAssignerUserId().equals("joe"));

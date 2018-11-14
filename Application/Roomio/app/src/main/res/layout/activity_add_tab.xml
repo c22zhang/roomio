@@ -16,17 +16,6 @@
         app:titleTextColor="#FFFFFF" />
 
     <TextView
-        android:id="@+id/tabNameText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="120dp"
-        android:text="@string/tab_name"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/tabAssigneeText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,18 +39,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/tabNameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/tabNameText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/tabNameText"
-        app:layout_constraintVertical_bias="0.444" />
-
-    <EditText
         android:id="@+id/tabAssigneeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -83,7 +60,6 @@
         android:layout_marginStart="8dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/enter_reason_for_tab"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -106,21 +82,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:layout_marginEnd="60dp"
         android:layout_marginTop="8dp"
         android:text="@string/amount"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tabAssigneeText"
-        app:layout_constraintStart_toStartOf="@+id/tabNameText"
-        app:layout_constraintTop_toBottomOf="@+id/tabNameText" />
+        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.871" />
 
     <EditText
-        android:id="@+id/amountEditText"
+        android:id="@+id/editText2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
+        android:layout_marginTop="220dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="@+id/amountTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/amountTextView" />
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="@+id/tabAssigneeEditText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tabAssigneeEditText"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

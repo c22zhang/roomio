@@ -3,6 +3,7 @@ package com.example.chriszhang.roomio.activities;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.text.Editable;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -57,7 +58,6 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
             @Override
             public void onClick(View v) {
                 saveGroup();
-                Snackbar.make(v, "Group saved!", Snackbar.LENGTH_LONG).show();
             }
         });
     }
@@ -94,7 +94,6 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
                     "ChrisZhang",
                     "Chris Zhang",
                     "asdf@gmail.com",
-                    "asdf",
                     Optional.<String>empty(),
                     Optional.<String>empty()));
             group.addMember(new User(
@@ -102,11 +101,13 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
                     "LeBron LUL",
                     "LeBron James",
                     "asdf123@gmail.com",
-                    "asdf",
                     Optional.<String>empty(),
                     Optional.<String>empty()));
 
             State.setGroup(group);
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Group saved!", Snackbar.LENGTH_LONG).show();
+
         }
     }
 
@@ -116,7 +117,7 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
     }
 
     private Optional<String> getGroupName() {
-        if(nameEditText.getText() == null){
+        if(nameEditText.getText() != null){
             return Optional.of(nameEditText.getText().toString());
         } else{
             return Optional.empty();

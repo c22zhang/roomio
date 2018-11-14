@@ -13,7 +13,6 @@ public class UserTest {
             "test",
             "Testy McTesterson",
             "test@gmail.com",
-            "password",
             Optional.of("1234"),
             empty);
 
@@ -25,7 +24,6 @@ public class UserTest {
 
     Tab tab = new Tab(
             "asdf",
-            "food",
             "your food",
             "bob",
             "joe",
@@ -38,7 +36,6 @@ public class UserTest {
         assert(user.getUsername().equals("test"));
         assert(user.getName().equals("Testy McTesterson"));
         assert(user.getEmail().equals("test@gmail.com"));
-        assert(user.getPassword().equals("password"));
         assert(user.getAdminedGroupId().equals(Optional.of("1234")));
         assert(user.getHouseholdGroupId().equals(Optional.empty()));
     }
@@ -102,7 +99,6 @@ public class UserTest {
         assert(notification.get("notification_type").equals("CLEAR_TAB_REQ"));
 
         assert(tab.get("tab_id").equals("asdf"));
-        assert(tab.get("tab_name").equals("food"));
         assert(tab.get("reason").equals("your food"));
         assert(tab.get("assignee").equals("bob"));
         assert(tab.get("assigner").equals("joe"));
@@ -127,7 +123,6 @@ public class UserTest {
         assert(output.contains("\"notification_type\":\"CLEAR_TAB_REQ\""));
 
         assert(output.contains("\"tab_id\":\"asdf\""));
-        assert(output.contains("\"tab_name\":\"food\""));
         assert(output.contains("\"reason\":\"your food\""));
         assert(output.contains("\"assignee\":\"bob\""));
         assert(output.contains("\"assigner\":\"joe\""));
@@ -146,7 +141,6 @@ public class UserTest {
         assert(user.getUsername().equals("test"));
         assert(user.getName().equals("Testy McTesterson"));
         assert(user.getEmail().equals("test@gmail.com"));
-        assert(user.getPassword().equals("password"));
         assert(user.getAdminedGroupId().equals(Optional.of("1234")));
         assert(user.getHouseholdGroupId().equals(Optional.empty()));
 

@@ -28,7 +28,6 @@ public final class LoginActivity extends AppCompatActivity {
                     "Test test",
                     "Test Test",
                     "abc@123.net",
-                    "asdf",
                     Optional.<String>empty(),
                     Optional.<String>empty());
 

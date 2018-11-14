@@ -17,7 +17,7 @@ import java.util.Set;
  */
 public final class User implements Jsonable {
 
-    private final String userId, username, name, email, password;
+    private final String userId, username, name, email;
     private List<Notification> notifications = new ArrayList<>();
     private List<Tab> myTabs = new ArrayList<>();
     private Optional<String> adminedGroupId, householdGroupId;
@@ -28,7 +28,6 @@ public final class User implements Jsonable {
      * @param username unique username for user
      * @param name the user's actual name
      * @param email the user's email
-     * @param password the user's password
      * @param adminedGroupId the groupId of the group this user admins, if it exists
      * @param householdGroupId the groupId of the household this user belongs to
      */
@@ -37,14 +36,12 @@ public final class User implements Jsonable {
             String username,
             String name,
             String email,
-            String password,
             Optional<String> adminedGroupId,
             Optional<String> householdGroupId){
         this.userId = userId;
         this.username = username;
         this.name = name;
         this.email = email;
-        this.password = password;
         this.adminedGroupId = adminedGroupId;
         this.householdGroupId = householdGroupId;
 
@@ -55,8 +52,6 @@ public final class User implements Jsonable {
     public String getUsername() { return username; }
     public String getName() { return name; }
     public String getEmail() { return email; }
-    //TODO: add some extra verification to this;
-    public String getPassword() { return password; }
     public Optional<String> getAdminedGroupId() { return adminedGroupId; }
     public void setAdminedGroupId(Optional<String> adminedGroupId) { this.adminedGroupId = adminedGroupId; }
     public Optional<String> getHouseholdGroupId() { return householdGroupId; }
@@ -130,7 +125,6 @@ public final class User implements Jsonable {
         obj.put("username", username);
         obj.put("name", name);
         obj.put("email", email);
-        obj.put("password", password);
 
         if(adminedGroupId.isPresent()){
             obj.put("admined_group_id", adminedGroupId.get());
@@ -176,7 +170,6 @@ public final class User implements Jsonable {
                         "username",
                         "name",
                         "email",
-                        "password",
                         "involved_tabs",
                         "notifications");
         Optional<String> adminedGroupId = Optional.empty();
@@ -196,7 +189,6 @@ public final class User implements Jsonable {
                     (String) obj.get("username"),
                     (String) obj.get("name"),
                     (String) obj.get("email"),
-                    (String) obj.get("password"),
                     adminedGroupId,
                     houseHoldGroupId);
             user = parseNotifications(notifications, user);
@@ -234,5 +226,15 @@ public final class User implements Jsonable {
                     name == other.getName();
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        result += 31 * result + userId.hashCode();
+        result += 19 * result + username.hashCode();
+        result += 23 * result + email.hashCode();
+        result += 41 * result + name.hashCode();
+        return result;
     }
 }

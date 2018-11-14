@@ -17,7 +17,6 @@ public class GroupTest {
                     "test",
                     "Testy McTesterson",
                     "test@gmail.com",
-                    "password",
             Optional.of("1234"),
             Optional.of("2345"));
 
