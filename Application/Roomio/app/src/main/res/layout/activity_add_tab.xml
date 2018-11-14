@@ -87,12 +87,12 @@
         android:text="@string/amount"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/tabAssigneeText"
-        app:layout_constraintEnd_toStartOf="@+id/editText2"
+        app:layout_constraintEnd_toStartOf="@+id/amountEditText"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.871" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/amountEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"

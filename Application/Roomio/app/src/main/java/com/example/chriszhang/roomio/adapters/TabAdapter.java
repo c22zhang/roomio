@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
@@ -15,15 +16,38 @@ import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
-public class TabAdapter extends ArrayAdapter {
+import java.util.ArrayList;
+import java.util.List;
+
+public class TabAdapter extends BaseAdapter {
 
     private final Activity context;
-    private Tab[] tabs;
+    private List<Tab> tabs;
 
-    public TabAdapter(Activity context, Tab[] tabs) {
-        super(context, R.layout.tab_row, tabs);
+    public TabAdapter(Activity context, List<Tab> tabs) {
         this.context = context;
         this.tabs = tabs;
+    }
+
+    public void refreshTabs(List<Tab> tabs){
+        this.tabs.clear();
+        this.tabs.addAll(tabs);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    @Override
+    public int getCount() {
+        return tabs.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return tabs.get(position);
     }
 
     @NonNull
@@ -37,7 +61,7 @@ public class TabAdapter extends ArrayAdapter {
         TextView tabName = row.findViewById(R.id.tabName);
         TextView assignee = row.findViewById(R.id.tabAssignee);
         TextView assigner = row.findViewById(R.id.tabAssigner);
-        Tab currTab = tabs[position];
+        Tab currTab = tabs.get(position);
         amount.setText("$" + currTab.getAmount().toString());
         tabName.setText(currTab.getReason());
 

@@ -23,6 +23,7 @@ public final class Group implements Jsonable {
     private List<Task> tasks = new ArrayList<>();
     private List<Message> groupChatMessages = new ArrayList<>();
     private HashMap<String, User> idsMap = new HashMap<>();
+    private HashMap<String, User> usernameMap = new HashMap<>();
     private HashMap<User, String> userToIdMap = new HashMap<>();
 
     /**
@@ -46,9 +47,18 @@ public final class Group implements Jsonable {
     public List<Task> getTasks() { return tasks; }
     public List<Message> getGroupChatMessages() { return groupChatMessages; }
 
+    /**
+     * @param id a user's userid
+     * @return a user associated from the given userid, if it exists
+     */
     public Optional<User> getMemberFromId(String id){
         return (idsMap.containsKey(id))?
                 Optional.of(idsMap.get(id)) : Optional.<User>empty();
+    }
+
+    public Optional<User> getMemberFromUsername(String username) {
+        return (usernameMap.containsKey(username))?
+                Optional.of(usernameMap.get(username)) : Optional.<User>empty();
     }
 
     /**
@@ -59,6 +69,7 @@ public final class Group implements Jsonable {
         member.setHouseholdGroupId(Optional.of(groupId));
         members.add(member);
         idsMap.put(member.getUserId(), member);
+        usernameMap.put(member.getUsername(), member);
         userToIdMap.put(member, member.getUserId());
     }
 

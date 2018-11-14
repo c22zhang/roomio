@@ -17,6 +17,9 @@ import com.example.chriszhang.roomio.utils.Utils;
 
 import java.util.Optional;
 
+/**
+ * Activity for adding tabs to the TabList
+ */
 public class AddTabActivity extends AppCompatActivity {
 
     Button saveTabButton;
@@ -35,8 +38,11 @@ public class AddTabActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent();
-                addTab();
-
+                int result = addTab();
+                if(result == RESULT_OK){
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }
@@ -46,30 +52,32 @@ public class AddTabActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void addTab() {
+    private int addTab() {
         if(amountEditText.getText() != null &&
                 tabAssigneeEditText != null &&
                 tabReasonEditText != null){
             if(State.hasGroup()){
                 Group group = State.getGroup();
                 User current = State.getCurrentUser();
-                Optional<User> assignee = State.getGroup()
-                        .getMemberFromId(
+                Optional<User> assignee = group
+                        .getMemberFromUsername(
                                 tabAssigneeEditText.getText().toString());
-                maybeCreateAndAddTab(assignee, current, group);
+                return maybeCreateAndAddTab(assignee, current, group);
             } else {
                Snackbar.make(getWindow().getDecorView().getRootView(),
                        "You are not currently in a group.",
                        Snackbar.LENGTH_LONG).show();
+               return RESULT_CANCELED;
             }
         } else {
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "You must set all fields within the form!",
                     Snackbar.LENGTH_LONG).show();
+            return RESULT_CANCELED;
         }
     }
 
-    private void maybeCreateAndAddTab(Optional<User> assignee, User current, Group group){
+    private int maybeCreateAndAddTab(Optional<User> assignee, User current, Group group){
         if(Utils.isPresent(assignee,
                 "Specified user does not exist.",
                 getWindow().getDecorView().getRootView())){
@@ -82,6 +90,9 @@ public class AddTabActivity extends AppCompatActivity {
                     Double.parseDouble(amountEditText.getText().toString()));
             current.addTab(tab);
             assignee.get().addTab(tab);
+            return RESULT_OK;
+        } else {
+            return RESULT_CANCELED;
         }
     }
 }

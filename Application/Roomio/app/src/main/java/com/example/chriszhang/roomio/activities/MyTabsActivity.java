@@ -2,6 +2,7 @@ package com.example.chriszhang.roomio.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -22,22 +23,25 @@ import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
+import java.util.ArrayList;
+
 /**
  * Activity for displaying your tabs
  */
 public final class MyTabsActivity extends ParentDrawerActivity {
 
-    Tab[] tabs;
+    ArrayList<Tab> tabs = new ArrayList<>();
+    TabAdapter adapter;
     ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tabs);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -45,19 +49,18 @@ public final class MyTabsActivity extends ParentDrawerActivity {
             }
         });
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         User currentUser = State.getCurrentUser();
-        tabs = currentUser.getMyTabs().toArray(
-                new Tab[currentUser.getMyTabs().size()]);
-        TabAdapter adapter = new TabAdapter(this, tabs);
+        tabs.addAll(currentUser.getMyTabs());
+        adapter = new TabAdapter(this, tabs);
         listView = findViewById(R.id.tabList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -69,9 +72,21 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 1){
+            if(resultCode == RESULT_OK) {
+                User currentUser = State.getCurrentUser();
+                adapter.refreshTabs(currentUser.getMyTabs());
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTabActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     private void getDetails(Object item) {
