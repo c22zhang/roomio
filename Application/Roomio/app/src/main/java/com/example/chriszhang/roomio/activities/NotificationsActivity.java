@@ -23,13 +23,15 @@ import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
+import java.util.ArrayList;
+
 /**
  * Activity for displaying personal notifications
  */
 public final class NotificationsActivity extends ParentDrawerActivity {
 
     //TODO: Replace with actual user data once other stuff is completed
-    Notification[] notifications;
+    ArrayList<Notification> notifications = new ArrayList<>();
     ListView listView;
 
     @Override
@@ -50,8 +52,7 @@ public final class NotificationsActivity extends ParentDrawerActivity {
         navigationView.setNavigationItemSelectedListener(this);
 
         User currentUser = State.getCurrentUser();
-        notifications =  currentUser.getNotifications().toArray(
-                new Notification[currentUser.getNotifications().size()]);
+        notifications.addAll(currentUser.getNotifications());
 
         PersonalNotificationAdapter notificationAdapter =
                 new PersonalNotificationAdapter(this, notifications);

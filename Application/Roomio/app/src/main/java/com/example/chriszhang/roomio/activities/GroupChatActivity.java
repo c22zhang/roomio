@@ -20,6 +20,8 @@ import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.GroupChatAdapter;
 import com.example.chriszhang.roomio.model.Message;
 
+import java.util.ArrayList;
+
 /**
  * Activity for the Group Chat
  */
@@ -30,12 +32,7 @@ public final class GroupChatActivity extends ParentDrawerActivity {
     ListView listView;
 
     //TODO: overwrite with actual data
-    Message[] messages = {
-            new Message("123",
-                    "Here's something to say!",
-                    "Bobby",
-                    "12/1/2015 05:12:33")
-    };
+    ArrayList<Message> messages = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

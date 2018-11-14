@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
@@ -14,16 +15,32 @@ import com.example.chriszhang.roomio.model.Task;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
-public class TaskAdapter extends ArrayAdapter {
+import java.util.List;
+
+public class TaskAdapter extends BaseAdapter {
 
     private final Activity context;
 
-    private Task[] tasks;
+    private List<Task> tasks;
 
-    public TaskAdapter(@NonNull Activity context, Task[] tasks){
-        super(context, R.layout.task_row, tasks);
+    public TaskAdapter(@NonNull Activity context, List<Task> tasks){
         this.context = context;
         this.tasks = tasks;
+    }
+
+    @Override
+    public int getCount() {
+        return tasks.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return tasks.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
     @Override
@@ -35,12 +52,12 @@ public class TaskAdapter extends ArrayAdapter {
         TextView taskName = row.findViewById(R.id.taskName);
         TextView assignee = row.findViewById(R.id.assigneeText);
         TextView assigner = row.findViewById(R.id.assignerText);
-        taskName.setText(tasks[position].getTaskName());
+        taskName.setText(tasks.get(position).getTaskName());
 
         User taskAssignee =
-                State.getGroup().getMemberFromId(tasks[position].getAssigneeUserId()).get();
+                State.getGroup().getMemberFromId(tasks.get(position).getAssigneeUserId()).get();
         User taskAssigner =
-                State.getGroup().getMemberFromId(tasks[position].getAssignerUserId()).get();
+                State.getGroup().getMemberFromId(tasks.get(position).getAssignerUserId()).get();
         assignee.setText(taskAssignee.getName());
         assigner.setText(taskAssigner.getName());
         return row;

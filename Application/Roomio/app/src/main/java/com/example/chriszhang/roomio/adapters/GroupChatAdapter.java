@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.chriszhang.roomio.R;
@@ -15,17 +16,32 @@ import com.example.chriszhang.roomio.model.Message;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
+import java.util.List;
 import java.util.Optional;
 
-public class GroupChatAdapter extends ArrayAdapter {
+public class GroupChatAdapter extends BaseAdapter {
 
     private final Activity context;
-    private Message[] messages;
+    private List<Message> messages;
 
-    public GroupChatAdapter(@NonNull Activity context, Message[] messages){
-        super(context, R.layout.group_chat_row, messages);
+    public GroupChatAdapter(@NonNull Activity context, List<Message> messages){
         this.context = context;
         this.messages = messages;
+    }
+
+    @Override
+    public int getCount() {
+        return messages.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return messages.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return 0;
     }
 
     @NonNull
@@ -38,7 +54,7 @@ public class GroupChatAdapter extends ArrayAdapter {
         TextView dateText = row.findViewById(R.id.dateText);
         TextView nameText = row.findViewById(R.id.usernameText);
         TextView messageText = row.findViewById(R.id.messageText);
-        Message currentMessage = messages[position];
+        Message currentMessage = messages.get(position);
         dateText.setText(currentMessage.getDateSent());
         if(State.hasGroup()){
             Optional<User> sender = State.getGroup().getMemberFromId(currentMessage.getSenderId());
