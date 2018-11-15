@@ -18,6 +18,7 @@ public class UserTest {
 
     Notification notification = new Notification(
             "asdfasdf",
+            "insert message here",
             "bob",
             "joe",
             Notification.Type.CLEAR_TAB_REQ);
