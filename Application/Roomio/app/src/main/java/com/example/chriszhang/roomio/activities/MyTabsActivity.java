@@ -84,6 +84,14 @@ public final class MyTabsActivity extends ParentDrawerActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        tabs.clear();
+        tabs.addAll(State.getCurrentUser().getMyTabs());
+        adapter.notifyDataSetChanged();
+    }
+
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTabActivity.class);
         startActivityForResult(intent, 1);

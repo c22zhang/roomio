@@ -30,8 +30,8 @@ import java.util.ArrayList;
  */
 public final class NotificationsActivity extends ParentDrawerActivity {
 
-    //TODO: Replace with actual user data once other stuff is completed
     ArrayList<Notification> notifications = new ArrayList<>();
+    PersonalNotificationAdapter adapter;
     ListView listView;
 
     @Override
@@ -54,11 +54,10 @@ public final class NotificationsActivity extends ParentDrawerActivity {
         User currentUser = State.getCurrentUser();
         notifications.addAll(currentUser.getNotifications());
 
-        PersonalNotificationAdapter notificationAdapter =
-                new PersonalNotificationAdapter(this, notifications);
+        adapter = new PersonalNotificationAdapter(this, notifications);
 
         listView = findViewById(R.id.personalNotificationList);
-        listView.setAdapter(notificationAdapter);
+        listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -68,8 +67,17 @@ public final class NotificationsActivity extends ParentDrawerActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        notifications.clear();
+        notifications.addAll(State.getCurrentUser().getNotifications());
+        adapter.notifyDataSetChanged();
+    }
+
     private void getDetails(Object item){
         Intent intent = new Intent(this, NotificationDetailActivity.class);
+        intent.putExtra("current_notification", item.toString());
         startActivity(intent);
     }
 }

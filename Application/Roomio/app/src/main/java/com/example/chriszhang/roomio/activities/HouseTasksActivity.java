@@ -86,6 +86,14 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
         }
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        houseTasks.clear();
+        houseTasks.addAll(State.getGroup().getTasks());
+        adapter.notifyDataSetChanged();
+    }
+
     private void addButtonTransition() {
         Intent intent = new Intent(this, AddTaskActivity.class);
         startActivityForResult(intent, 1);
@@ -93,6 +101,7 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
 
     private void getDetails(Object item){
         Intent intent = new Intent(this, TaskDetailActivity.class);
+        intent.putExtra("current_task", item.toString());
         startActivity(intent);
     }
 }

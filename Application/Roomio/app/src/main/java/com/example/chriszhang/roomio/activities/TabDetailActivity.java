@@ -51,7 +51,7 @@ public class TabDetailActivity extends AppCompatActivity {
         tabDetailDeleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
 
