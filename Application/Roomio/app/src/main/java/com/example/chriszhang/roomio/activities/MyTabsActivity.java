@@ -91,6 +91,7 @@ public final class MyTabsActivity extends ParentDrawerActivity {
 
     private void getDetails(Object item) {
         Intent intent = new Intent(this, TabDetailActivity.class);
+        intent.putExtra("current_tab", item.toString());
         startActivity(intent);
     }
 

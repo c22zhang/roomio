@@ -14,7 +14,7 @@ public final class Tab implements Jsonable {
 
     private final String tabId, assignerUserId;
     private final String dateAssigned;
-    private String tabName, reason, assigneeUserId;
+    private String reason, assigneeUserId;
     private Double amount;
 
     /**
@@ -34,7 +34,6 @@ public final class Tab implements Jsonable {
             String dateAssigned,
             Double amount){
         this.tabId = tabId;
-        this.tabName = tabName;
         this.reason = reason;
         this.assigneeUserId = assigneeUserId;
         this.assignerUserId = assignerUserId;
@@ -47,7 +46,6 @@ public final class Tab implements Jsonable {
     public String getAssignerUserId() { return assignerUserId; }
     public String getAssigneeUserId() { return assigneeUserId; }
     public String getDateAssigned() { return dateAssigned; }
-    public void setTabName(String tabName) { this.tabName = tabName; }
     public String getReason() { return reason; }
     public void setReason(String reason) { this.reason = reason; }
     public Double getAmount() { return amount; }
@@ -77,7 +75,6 @@ public final class Tab implements Jsonable {
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("tab_id", tabId);
-        obj.put("tab_name", tabName);
         obj.put("reason", reason);
         obj.put("assignee", assigneeUserId);
         obj.put("assigner", assignerUserId);
