@@ -16,4 +16,97 @@
         app:titleTextColor="#FFFFFF"
         />
 
+    <TextView
+        android:id="@+id/taskDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Task Name:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailAssignerText"
+        app:layout_constraintEnd_toEndOf="@+id/taskDetailAssignerText"
+        app:layout_constraintHorizontal_bias="0.177"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailAssignerText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.889" />
+
+    <TextView
+        android:id="@+id/taskDetailAssignerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Assigner:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailAssigneeText"
+        app:layout_constraintEnd_toEndOf="@+id/taskDetailAssigneeText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailAssigneeText" />
+
+    <TextView
+        android:id="@+id/taskDetailAssigneeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Assignee:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailDateText"
+        app:layout_constraintEnd_toEndOf="@+id/taskDetailDateText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailDateText" />
+
+    <TextView
+        android:id="@+id/taskDetailDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="Date:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailDetails"
+        app:layout_constraintEnd_toEndOf="@+id/taskDetailDetails"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/taskDetailDetails" />
+
+    <TextView
+        android:id="@+id/taskDetailDetails"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="232dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:maxLines="6"
+        android:text="Details:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/taskDetailClearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Mark as Cleared"
+        app:layout_constraintBottom_toTopOf="@+id/taskDetailDeleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/taskDetailDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Delete"
+        android:textColor="#F63109"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

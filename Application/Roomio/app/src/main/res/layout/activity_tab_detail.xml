@@ -13,7 +13,99 @@
         android:background="#2c2fe8"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="Tab Detail"
-        app:titleTextColor="#FFFFFF"
-        />
+        app:titleTextColor="#FFFFFF" />
+
+    <TextView
+        android:id="@+id/tabDetailReasonText"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:lines="4"
+        android:text="Reason:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tabDetailAmountText"
+        app:layout_constraintEnd_toEndOf="@+id/tabDetailAmountText"
+        app:layout_constraintHorizontal_bias="0.068"
+        app:layout_constraintStart_toStartOf="@+id/tabDetailAmountText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.93" />
+
+    <TextView
+        android:id="@+id/tabDetailAmountText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:text="Amount:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tabDetailDateText"
+        app:layout_constraintEnd_toEndOf="@+id/tabDetailDateText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tabDetailDateText" />
+
+    <TextView
+        android:id="@+id/tabDetailDateText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:text="Date:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tabDetailAssignerText"
+        app:layout_constraintEnd_toEndOf="@+id/tabDetailAssignerText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tabDetailAssignerText" />
+
+    <TextView
+        android:id="@+id/tabDetailAssignerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="44dp"
+        android:text="Assigner:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/tabDetailAssigneeText"
+        app:layout_constraintEnd_toEndOf="@+id/tabDetailAssigneeText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tabDetailAssigneeText" />
+
+    <TextView
+        android:id="@+id/tabDetailAssigneeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="188dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Assignee:"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tabDetailClearButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Mark as Cleared"
+        app:layout_constraintBottom_toTopOf="@+id/tabDetailDeleteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tabDetailDeleteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="Delete"
+        android:textColor="#F63109"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
