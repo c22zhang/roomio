@@ -61,15 +61,15 @@ public class TabDetailActivity extends AppCompatActivity {
             final Double amount = Double.parseDouble(obj.get("amount").toString());
             appendToText(tabDetailAmountText, " " + obj.get("amount"));
             appendToText(tabDetailAssigneeText, " " +
-                    group.getMemberFromId(assigneeId).get());
+                    group.getMemberFromId(assigneeId).get().getUsername());
             appendToText(tabDetailAssignerText, " " +
-                    group.getMemberFromId(assignerId).get());
+                    group.getMemberFromId(assignerId).get().getUsername());
             appendToText(tabDetailDateText, " " + obj.get("date_assigned"));
             appendToText(tabDetailReasonText, " " + reason);
-            if(obj.get("assignee").equals(State.getCurrentUser().getUsername())){
+            if(obj.get("assignee").equals(State.getCurrentUser().getUserId())){
                 tabDetailClearButton.setEnabled(true);
             }
-            if(obj.get("assigner").equals(State.getCurrentUser().getUsername())){
+            if(obj.get("assigner").equals(State.getCurrentUser().getUserId())){
                 tabDetailDeleteButton.setEnabled(true);
             }
             tabDetailClearButton.setOnClickListener(new View.OnClickListener() {

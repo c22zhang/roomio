@@ -20,6 +20,12 @@ public class State {
         this.currentUser = currentUser;
     }
 
+    public void logout(){
+        stateInstance = null;
+        group = null;
+        currentUser = null;
+    }
+
     public static boolean hasGroup() {
        return (stateInstance != null && stateInstance.group != null);
     }

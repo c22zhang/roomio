@@ -63,16 +63,16 @@ public class TaskDetailActivity extends AppCompatActivity {
             final String taskName = obj.get("task_name").toString();
             appendToText(taskDetailName, " " + taskName);
             appendToText(taskDetailAssignerText, " "
-                    + group.getMemberFromId(assignerId).get());
+                    + group.getMemberFromId(assignerId).get().getUsername());
             appendToText(taskDetailAssigneeText, " " +
-                    group.getMemberFromId(assigneeId).get());
+                    group.getMemberFromId(assigneeId).get().getUsername());
             appendToText(taskDetailDateText, " " + obj.get("date_assigned"));
             appendToText(taskDetailDetails, " " + description);
 
-            if(obj.get("assignee").equals(State.getCurrentUser().getUsername())){
+            if(obj.get("assignee").equals(State.getCurrentUser().getUserId())){
                 taskDetailClearButton.setEnabled(true);
             }
-            if(obj.get("assigner").equals(State.getCurrentUser().getUsername())){
+            if(obj.get("assigner").equals(State.getCurrentUser().getUserId())){
                 taskDetailDeleteButton.setEnabled(true);
             }
 
