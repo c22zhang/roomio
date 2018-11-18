@@ -19,6 +19,9 @@ import com.example.chriszhang.roomio.state.State;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Activity that displays detailed about a specific tab.
+ */
 public class TabDetailActivity extends AppCompatActivity {
 
     TextView tabDetailReasonText,
@@ -52,6 +55,7 @@ public class TabDetailActivity extends AppCompatActivity {
             final String assigneeId = obj.get("assignee").toString();
             final String assignerId = obj.get("assigner").toString();
             final String reason = obj.get("reason").toString();
+            final Double amount = Double.parseDouble(obj.get("amount").toString());
             appendToText(tabDetailAmountText, " " + obj.get("amount"));
             appendToText(tabDetailAssigneeText, " " +
                     group.getMemberFromId(assigneeId).get());
@@ -68,9 +72,7 @@ public class TabDetailActivity extends AppCompatActivity {
             tabDetailClearButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    createClearNotification(assigneeId, assignerId, reason);
-                    Snackbar.make(getWindow().getDecorView().getRootView(),
-                            "Notification sent to assigner!" , Snackbar.LENGTH_LONG).show();
+                    createClearNotification(assigneeId, assignerId, reason, amount);
                 }
             });
 
@@ -90,16 +92,19 @@ public class TabDetailActivity extends AppCompatActivity {
     }
 
     private void createClearNotification(
-            String assigneeUserId, String assignerUserId, String reason){
+            String assigneeUserId, String assignerUserId, String reason, Double amount){
         Group group = State.getGroup();
         User assignee = group.getMemberFromId(assigneeUserId).get();
         User assigner = group.getMemberFromId(assignerUserId).get();
-        String message = String.format("%s wants to clear tab %s.", assignee.getUsername(), reason);
+        String message = String.format("%s wants to clear tab %s with amount %.2f",
+                assignee.getUsername(), reason, amount);
         assigner.addNotification(new Notification("",
                 message,
+                assigner.getUserId(),
                 assignee.getUserId(),
-                State.getCurrentUser().getUserId(),
                 Notification.Type.CLEAR_TAB_REQ));
+        Snackbar.make(getWindow().getDecorView().getRootView(),
+                "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
     }
 
     private void deleteThis(JSONObject obj, String assigneeUserId, String assignerUserId){
