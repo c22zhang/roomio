@@ -97,6 +97,14 @@ public class AddTabActivity extends AppCompatActivity {
         if(Utils.isPresent(assignee,
                 "Specified user does not exist.",
                 getWindow().getDecorView().getRootView())){
+
+            if(Double.parseDouble(amountEditText.getText().toString()) <= 0){
+                Snackbar.make(getWindow().getDecorView().getRootView(),
+                        "You must enter a positive amount greater than 0.",
+                        Snackbar.LENGTH_LONG).show();
+                return RESULT_CANCELED;
+            }
+            
             Tab tab = new Tab (
                     "",
                     tabReasonEditText.getText().toString(),

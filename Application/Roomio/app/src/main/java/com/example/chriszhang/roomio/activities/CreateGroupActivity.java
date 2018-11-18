@@ -33,6 +33,21 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
     Spinner deleteSpinner;
     Button saveButton;
 
+    User user1 = new User(
+            "asdf",
+            "ChrisZhang",
+            "Chris Zhang",
+            "asdf@gmail.com",
+            Optional.<String>empty(),
+            Optional.<String>empty());
+    User user2 = new User(
+            "1234",
+            "LeBron LUL",
+            "LeBron James",
+            "asdf123@gmail.com",
+            Optional.<String>empty(),
+            Optional.<String>empty());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +85,8 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
             if(getGroupName().isPresent()){
                 group.setGroupName(getGroupName().get());
             }
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Edited group!", Snackbar.LENGTH_LONG).show();
             //TODO: lookup usernames from backend and add and remove as necessary
         } else {
             if(getGroupName().isPresent()){
@@ -90,20 +107,8 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
 
             //TODO: replace hardcoded users once server stuff is working
             //==============================================================
-            group.addMember(new User(
-                    "asdf",
-                    "ChrisZhang",
-                    "Chris Zhang",
-                    "asdf@gmail.com",
-                    Optional.<String>empty(),
-                    Optional.<String>empty()));
-            group.addMember(new User(
-                    "1234",
-                    "LeBron LUL",
-                    "LeBron James",
-                    "asdf123@gmail.com",
-                    Optional.<String>empty(),
-                    Optional.<String>empty()));
+            group.addMember(user1);
+            group.addMember(user2);
 
             State.setGroup(group);
             Snackbar.make(getWindow().getDecorView().getRootView(),
