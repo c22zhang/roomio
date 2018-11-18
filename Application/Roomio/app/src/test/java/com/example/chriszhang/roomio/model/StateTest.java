@@ -12,7 +12,6 @@ public class StateTest {
             "asdf",
             "asdf",
             "asdf",
-            "asdf",
             Optional.of("asdf"),
             Optional.of("asdf"));
 
@@ -20,7 +19,6 @@ public class StateTest {
             "wer",
             "asdfe",
             "as",
-            "sdf",
             Optional.of("wer"),
             Optional.of("sdf"));
 

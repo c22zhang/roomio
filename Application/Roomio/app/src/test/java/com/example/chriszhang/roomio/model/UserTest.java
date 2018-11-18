@@ -21,7 +21,8 @@ public class UserTest {
             "insert message here",
             "bob",
             "joe",
-            Notification.Type.CLEAR_TAB_REQ);
+            Notification.Type.CLEAR_TAB_REQ,
+            Optional.<Jsonable>empty());
 
     Tab tab = new Tab(
             "asdf",

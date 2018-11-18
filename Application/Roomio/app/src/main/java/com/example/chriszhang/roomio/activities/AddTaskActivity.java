@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Jsonable;
 import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Task;
 import com.example.chriszhang.roomio.model.User;
@@ -78,14 +79,15 @@ public class AddTaskActivity extends AppCompatActivity {
         Group group = State.getGroup();
         User assignee = group.getMemberFromId(generatedTask.getAssigneeUserId()).get();
         User assigner = State.getCurrentUser();
-        String message = String.format("%s has assigned %s a task: %s", assigner.getUsername(),
-                assignee.getUsername(), generatedTask.getTaskName());
+        String message = String.format("%s has assigned you a task: %s", assigner.getUsername(),
+                 generatedTask.getTaskName());
         assignee.addNotification(new Notification(
                 "",
                 message,
                 assignee.getUserId(),
                 assigner.getUserId(),
-                Notification.Type.ASSIGNMENT));
+                Notification.Type.ASSIGNMENT,
+                Optional.<Jsonable>empty()));
     }
 
     private int createTask(Optional<User> assignee, User current, Group group){

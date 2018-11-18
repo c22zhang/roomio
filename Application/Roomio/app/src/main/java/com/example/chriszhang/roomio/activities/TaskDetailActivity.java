@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.JsonToObjectException;
+import com.example.chriszhang.roomio.model.Jsonable;
 import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Task;
 import com.example.chriszhang.roomio.model.User;
@@ -18,6 +19,8 @@ import com.example.chriszhang.roomio.state.State;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Optional;
 
 /**
  * Activity for viewing details about a specific task.
@@ -76,7 +79,7 @@ public class TaskDetailActivity extends AppCompatActivity {
             taskDetailClearButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    createClearNotification(assigneeId, assignerId, taskName);
+                    createClearNotification(assigneeId, assignerId, taskName, obj);
                 }
             });
 
@@ -95,21 +98,31 @@ public class TaskDetailActivity extends AppCompatActivity {
         }
     }
 
-    private void createClearNotification(String assigneeId, String assignerId, String taskName){
+    private void createClearNotification(
+            String assigneeId, String assignerId, String taskName, JSONObject obj){
         Group group = State.getGroup();
         User assignee = group.getMemberFromId(assigneeId).get();
         User assigner = group.getMemberFromId(assignerId).get();
         String message = String.format("%s wants to clear task %s.",
                 assignee.getUsername(), taskName);
-        Notification notification = new Notification(
-                "",
-                message,
-                assigner.getUserId(),
-                assignee.getUserId(),
-                Notification.Type.CLEAR_TASK_REQ);
-        assigner.addNotification(notification);
-        Snackbar.make(getWindow().getDecorView().getRootView().getRootView(),
-                "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
+        try{
+            Notification notification = new Notification(
+                    "",
+                    message,
+                    assigner.getUserId(),
+                    assignee.getUserId(),
+                    Notification.Type.CLEAR_TASK_REQ,
+                    Optional.<Jsonable>of(Task.from(obj)));
+            assigner.addNotification(notification);
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
+        } catch(JSONException | JsonToObjectException e){
+            e.printStackTrace();
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Malformed JSON Task -- could not make notification.",
+                    Snackbar.LENGTH_LONG).show();
+        }
+
     }
 
     private void deleteThisTask(JSONObject obj){

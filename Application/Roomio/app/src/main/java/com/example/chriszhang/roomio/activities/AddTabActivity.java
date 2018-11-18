@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Jsonable;
 import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
@@ -88,7 +89,8 @@ public class AddTabActivity extends AppCompatActivity {
                 message,
                 assignee.getUserId(),
                 State.getCurrentUser().getUserId(),
-                Notification.Type.ASSIGNMENT));
+                Notification.Type.ASSIGNMENT,
+                Optional.<Jsonable>empty()));
     }
 
     private int maybeCreateAndAddTab(Optional<User> assignee, User current, Group group){

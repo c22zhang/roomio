@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.JsonToObjectException;
+import com.example.chriszhang.roomio.model.Jsonable;
 import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
@@ -18,6 +19,8 @@ import com.example.chriszhang.roomio.state.State;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Optional;
 
 /**
  * Activity that displays detailed about a specific tab.
@@ -72,7 +75,7 @@ public class TabDetailActivity extends AppCompatActivity {
             tabDetailClearButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    createClearNotification(assigneeId, assignerId, reason, amount);
+                    createClearNotification(assigneeId, assignerId, reason, amount, obj);
                 }
             });
 
@@ -92,19 +95,32 @@ public class TabDetailActivity extends AppCompatActivity {
     }
 
     private void createClearNotification(
-            String assigneeUserId, String assignerUserId, String reason, Double amount){
+            String assigneeUserId,
+            String assignerUserId,
+            String reason,
+            Double amount,
+            JSONObject obj){
         Group group = State.getGroup();
         User assignee = group.getMemberFromId(assigneeUserId).get();
         User assigner = group.getMemberFromId(assignerUserId).get();
         String message = String.format("%s wants to clear tab %s with amount %.2f",
                 assignee.getUsername(), reason, amount);
-        assigner.addNotification(new Notification("",
-                message,
-                assigner.getUserId(),
-                assignee.getUserId(),
-                Notification.Type.CLEAR_TAB_REQ));
-        Snackbar.make(getWindow().getDecorView().getRootView(),
-                "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
+        try{
+            assigner.addNotification(new Notification("",
+                    message,
+                    assigner.getUserId(),
+                    assignee.getUserId(),
+                    Notification.Type.CLEAR_TAB_REQ,
+                    Optional.<Jsonable>of(Tab.from(obj))));
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
+        } catch(JSONException | JsonToObjectException e){
+            e.printStackTrace();
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "Malformed object bundle -- could not create notification.",
+                    Snackbar.LENGTH_LONG).show();
+        }
+
     }
 
     private void deleteThis(JSONObject obj, String assigneeUserId, String assignerUserId){

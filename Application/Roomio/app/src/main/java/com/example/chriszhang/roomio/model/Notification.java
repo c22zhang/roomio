@@ -6,6 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Optional;
 import java.util.Set;
 
 public final class Notification implements Jsonable {
@@ -32,6 +33,7 @@ public final class Notification implements Jsonable {
     }
 
     private final String notificationId, toUserId, fromUserId, message;
+    private final Optional<Jsonable> potentialClear;
     private final boolean isClearable;
     private final Type notificationType;
 
@@ -47,13 +49,15 @@ public final class Notification implements Jsonable {
             String message,
             String toUserId,
             String fromUserId,
-            Type notificationType){
+            Type notificationType,
+            Optional<Jsonable> potentialClear){
         this.notificationId = notificationId;
         this.message = message;
         this.toUserId = toUserId;
         this.fromUserId = fromUserId;
         this.notificationType = notificationType;
         this.isClearable = notificationType.isClearable;
+        this.potentialClear = potentialClear;
     }
 
     // assorted getters
@@ -63,7 +67,9 @@ public final class Notification implements Jsonable {
     public String getFromUserId() { return fromUserId; }
     public boolean isClearable() { return isClearable; }
     public Type getNotificationType() { return notificationType; }
-
+    public Optional<Jsonable> getPotentialClear() {
+        return potentialClear;
+    }
 
     /**
      * @return JSON string representing this notification
@@ -91,6 +97,10 @@ public final class Notification implements Jsonable {
         obj.put("to_user_id", toUserId);
         obj.put("from_user_id", fromUserId);
         obj.put("notification_type", notificationType.toString());
+
+        if(potentialClear.isPresent()){
+            obj.put("potential_clear", potentialClear.get().toJson());
+        }
         return obj;
     }
 
@@ -110,14 +120,34 @@ public final class Notification implements Jsonable {
                         "from_user_id",
                         "notification_type");
         if(Utils.containsRequiredFields(obj, required)){
+            Optional<Jsonable> potentialClear = Optional.empty();
+            Jsonable modelObj = getModelObject(obj);
+            if(modelObj != null) {
+                potentialClear = Optional.of(modelObj);
+            }
             return new Notification(
                     (String) obj.get("notification_id"),
                     (String) obj.get("message"),
                     (String) obj.get("to_user_id"),
                     (String) obj.get("from_user_id"),
-                    Type.valueOf((String) obj.get("notification_type")));
+                    Type.valueOf((String) obj.get("notification_type")),
+                    potentialClear);
         } else {
             throw new JsonToObjectException("Missing required fields");
         }
+    }
+
+    private static Jsonable getModelObject(JSONObject obj)
+            throws JsonToObjectException, JSONException{
+        if(obj.has("potential_clear")){
+          JSONObject nested = obj.getJSONObject("potential_clear");
+          if(nested.has("task_id")){
+              return Task.from(nested);
+          }
+          if (nested.has("tab_id")) {
+              return Tab.from(nested);
+          }
+        }
+        return null;
     }
 }
