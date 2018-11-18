@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Task;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
@@ -24,6 +25,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     Button saveTaskButton;
     EditText taskDescriptionEditText, taskAssigneeEditText, taskNameEditText;
+    Task generatedTask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,7 @@ public class AddTaskActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 int result = saveTask();
                 if(result == RESULT_OK) {
+                    sendTaskNotification();
                     setResult(RESULT_OK, intent);
                     finish();
                 }
@@ -71,6 +74,20 @@ public class AddTaskActivity extends AppCompatActivity {
         }
     }
 
+    private void sendTaskNotification() {
+        Group group = State.getGroup();
+        User assignee = group.getMemberFromId(generatedTask.getAssigneeUserId()).get();
+        User assigner = State.getCurrentUser();
+        String message = String.format("%s has assigned %s a task: %s", assigner.getUsername(),
+                assignee.getUsername(), generatedTask.getTaskName());
+        assignee.addNotification(new Notification(
+                "",
+                message,
+                assignee.getUserId(),
+                assigner.getUserId(),
+                Notification.Type.ASSIGNMENT));
+    }
+
     private int createTask(Optional<User> assignee, User current, Group group){
         if(assignee.isPresent()){
             Task task = new Task(
@@ -80,6 +97,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     taskNameEditText.getText().toString(),
                     taskDescriptionEditText.getText().toString(),
                     Utils.getCurrentDate());
+            this.generatedTask = task;
             group.addTask(task);
             return RESULT_OK;
         } else {

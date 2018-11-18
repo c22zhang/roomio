@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
+import com.example.chriszhang.roomio.model.Notification;
 import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
@@ -24,6 +25,7 @@ public class AddTabActivity extends AppCompatActivity {
 
     Button saveTabButton;
     EditText amountEditText, tabAssigneeEditText, tabReasonEditText;
+    Tab generatedTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,16 +42,12 @@ public class AddTabActivity extends AppCompatActivity {
                 Intent intent = new Intent();
                 int result = addTab();
                 if(result == RESULT_OK){
+                    addNotification();
                     setResult(RESULT_OK, intent);
                     finish();
                 }
             }
         });
-    }
-
-    private void saveData() {
-        Intent intent  = new Intent(this, MyTabsActivity.class);
-        startActivity(intent);
     }
 
     private int addTab() {
@@ -77,6 +75,22 @@ public class AddTabActivity extends AppCompatActivity {
         }
     }
 
+    private void addNotification(){
+        Group group = State.getGroup();
+        User assignee = group.getMemberFromId(generatedTab.getAssigneeUserId()).get();
+        String message =
+                String.format(
+                        "%s has assigned you a tab for the following reason: %s.",
+                        State.getCurrentUser().getUsername(),
+                        generatedTab.getReason());
+        assignee.addNotification(new Notification(
+                "",
+                message,
+                assignee.getUserId(),
+                State.getCurrentUser().getUserId(),
+                Notification.Type.ASSIGNMENT));
+    }
+
     private int maybeCreateAndAddTab(Optional<User> assignee, User current, Group group){
         if(Utils.isPresent(assignee,
                 "Specified user does not exist.",
@@ -88,6 +102,7 @@ public class AddTabActivity extends AppCompatActivity {
                     current.getUserId(),
                     Utils.getCurrentDate(),
                     Double.parseDouble(amountEditText.getText().toString()));
+            this.generatedTab = tab;
             current.addTab(tab);
             assignee.get().addTab(tab);
             return RESULT_OK;

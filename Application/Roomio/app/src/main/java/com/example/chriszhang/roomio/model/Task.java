@@ -53,6 +53,24 @@ public final class Task implements Jsonable {
     public void setAssigneeUserId(String assigneeUserId) { this.assigneeUserId = assigneeUserId; }
 
     /**
+     * Equality comparison between this task and another object.
+     * @param obj the object to be compared
+     * @return whether or not the object is equal to this task
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Task){
+            Task tObj = (Task) obj;
+            return tObj.getTaskId().equals(this.getTaskId()) &&
+                    tObj.getTaskName().equals(this.getTaskName()) &&
+                    tObj.getAssignerUserId().equals(this.getAssignerUserId()) &&
+                    tObj.getAssigneeUserId().equals(this.getAssigneeUserId()) &&
+                    tObj.getDateAssigned().equals(this.getDateAssigned());
+        }
+        return false;
+    }
+
+    /**
      * @return JSON string representation of this task
      */
     @Override

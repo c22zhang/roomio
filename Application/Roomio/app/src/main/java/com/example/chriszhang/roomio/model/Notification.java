@@ -105,6 +105,7 @@ public final class Notification implements Jsonable {
         Set<String> required =
                 Utils.requiredFieldSet(
                         "notification_id",
+                        "message",
                         "to_user_id",
                         "from_user_id",
                         "notification_type");

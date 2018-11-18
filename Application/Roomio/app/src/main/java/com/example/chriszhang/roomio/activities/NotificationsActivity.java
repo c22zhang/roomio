@@ -76,8 +76,10 @@ public final class NotificationsActivity extends ParentDrawerActivity {
     }
 
     private void getDetails(Object item){
+        Notification not = (Notification) item;
         Intent intent = new Intent(this, NotificationDetailActivity.class);
         intent.putExtra("current_notification", item.toString());
+        intent.putExtra("is_clearable", not.isClearable());
         startActivity(intent);
     }
 }

@@ -52,6 +52,24 @@ public final class Tab implements Jsonable {
     public void setAmount(Double amount) { this.amount = amount; }
     public void setAssigneeUserId(String assigneeUserId) { this.assigneeUserId = assigneeUserId; }
 
+    /**
+     * Equality checking for tab objects
+     * @param obj an object to check for equality
+     * @return true if the object is equal to this Tab
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Tab){
+            Tab tObj = (Tab) obj;
+            return tObj.getTabId().equals(this.getTabId()) &&
+                    tObj.getAssigneeUserId().equals(this.getAssigneeUserId()) &&
+                    tObj.getAssignerUserId().equals(this.getAssignerUserId()) &&
+                    tObj.getDateAssigned().equals(this.getDateAssigned()) &&
+                    tObj.getReason().equals(this.getReason()) &&
+                    tObj.getAmount().equals(this.getAmount());
+        }
+        return false;
+    }
 
     /**
      * @return the JSON string represented by this tab.

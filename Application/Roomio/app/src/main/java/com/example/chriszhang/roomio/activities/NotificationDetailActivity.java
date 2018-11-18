@@ -24,13 +24,21 @@ public class NotificationDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String notificationJson = intent.getExtras().get("current_notification").toString();
+        Boolean isClearable = (Boolean) intent.getExtras().get("is_clearable");
         notificationDetail = findViewById(R.id.notificationDetail);
         clearButton = findViewById(R.id.clearButton);
         dontClearButton = findViewById(R.id.dontClearButton);
 
+        if(isClearable != null && !isClearable){
+            clearButton.setEnabled(false);
+            dontClearButton.setEnabled(false);
+        }
+
         try{
             JSONObject obj = new JSONObject(notificationJson);
-            //TODO put message in detail view after refactor
+            String message = obj.get("message").toString();
+            notificationDetail.setText(message);
+
         } catch(JSONException e) {
             e.printStackTrace();
             Snackbar.make(getWindow().getDecorView().getRootView(),
