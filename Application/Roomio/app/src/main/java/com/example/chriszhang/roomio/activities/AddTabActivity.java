@@ -104,7 +104,7 @@ public class AddTabActivity extends AppCompatActivity {
                         Snackbar.LENGTH_LONG).show();
                 return RESULT_CANCELED;
             }
-            
+
             Tab tab = new Tab (
                     "",
                     tabReasonEditText.getText().toString(),

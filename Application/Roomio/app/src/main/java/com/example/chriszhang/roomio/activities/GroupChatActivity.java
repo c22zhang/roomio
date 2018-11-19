@@ -19,6 +19,8 @@ import android.widget.ListView;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.adapters.GroupChatAdapter;
 import com.example.chriszhang.roomio.model.Message;
+import com.example.chriszhang.roomio.state.State;
+import com.example.chriszhang.roomio.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -30,8 +32,8 @@ public final class GroupChatActivity extends ParentDrawerActivity {
     Button sendButton;
     EditText messageEdit;
     ListView listView;
+    GroupChatAdapter adapter;
 
-    //TODO: overwrite with actual data
     ArrayList<Message> messages = new ArrayList<>();
 
     @Override
@@ -53,8 +55,39 @@ public final class GroupChatActivity extends ParentDrawerActivity {
         sendButton = findViewById(R.id.sendButton);
         messageEdit = findViewById(R.id.enterMessageEditText);
 
-        GroupChatAdapter adapter = new GroupChatAdapter(this, messages);
+        adapter = new GroupChatAdapter(this, messages);
         listView = findViewById(R.id.groupChatList);
         listView.setAdapter(adapter);
+
+        sendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createMessage();
+            }
+        });
+    }
+
+    private void updateList(){
+        messages.clear();
+        messages.addAll(State.getGroup().getGroupChatMessages());
+        adapter.notifyDataSetChanged();
+    }
+
+    private void createMessage(){
+        if(State.hasGroup()){
+            if(!messageEdit.getText().toString().equals("")){
+                Message msg = new Message("",
+                        messageEdit.getText().toString(),
+                        State.getCurrentUser().getUserId(),
+                        Utils.getCurrentDate());
+                State.getGroup().addMessage(msg);
+                messageEdit.setText("");
+                updateList();
+            }
+        } else {
+            Snackbar.make(getWindow().getDecorView().getRootView(),
+                    "You are not part of a group. Please create or join a group " +
+                            "to send messages.", Snackbar.LENGTH_LONG).show();
+        }
     }
 }
