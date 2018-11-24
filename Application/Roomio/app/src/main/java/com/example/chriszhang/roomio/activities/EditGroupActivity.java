@@ -29,8 +29,7 @@ import java.util.Optional;
  */
 public final class EditGroupActivity extends ParentDrawerActivity{
 
-    EditText addEditText, nameEditText;
-    Spinner deleteSpinner;
+    EditText addEditText, nameEditText, deleteEditText;
     Button saveButton;
 
 
@@ -54,7 +53,7 @@ public final class EditGroupActivity extends ParentDrawerActivity{
         saveButton = findViewById(R.id.saveButton);
         addEditText = findViewById(R.id.addEditText);
         nameEditText = findViewById(R.id.groupNameEdit);
-        deleteSpinner = findViewById(R.id.spinner);
+        deleteEditText = findViewById(R.id.deleteUserEditText);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
