@@ -27,26 +27,12 @@ import java.util.Optional;
 /**
  * Activity where the user will create/update groups.
  */
-public final class CreateGroupActivity extends ParentDrawerActivity{
+public final class EditGroupActivity extends ParentDrawerActivity{
 
     EditText addEditText, nameEditText;
     Spinner deleteSpinner;
     Button saveButton;
 
-    User user1 = new User(
-            "asdf",
-            "ChrisZhang",
-            "Chris Zhang",
-            "asdf@gmail.com",
-            Optional.<String>empty(),
-            Optional.<String>empty());
-    User user2 = new User(
-            "1234",
-            "LeBron LUL",
-            "LeBron James",
-            "asdf123@gmail.com",
-            Optional.<String>empty(),
-            Optional.<String>empty());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,29 +77,15 @@ public final class CreateGroupActivity extends ParentDrawerActivity{
         } else {
             if(getGroupName().isPresent()){
                 groupName = getGroupName().get();
+                State.getGroup().setGroupName(groupName);
             } else {
                 Snackbar.make(getWindow().getDecorView().getRootView(),
                         "Group name must be set if creating a group from scratch!",
                         Snackbar.LENGTH_LONG).show();
                 return;
             }
-
-            Group group = new Group("",
-                    State.getCurrentUser().getUserId(),
-                    groupName);
-
-            State.getCurrentUser().setAdminedGroupId(Optional.of(group.getGroupId()));
-            group.addMember(State.getCurrentUser());
-
-            //TODO: replace hardcoded users once server stuff is working
-            //==============================================================
-            group.addMember(user1);
-            group.addMember(user2);
-
-            State.setGroup(group);
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "Group saved!", Snackbar.LENGTH_LONG).show();
-
         }
     }
 

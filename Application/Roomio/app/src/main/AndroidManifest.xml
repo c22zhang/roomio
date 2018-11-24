@@ -22,7 +22,7 @@
             android:label="@string/title_activity_notifications"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name=".activities.CreateGroupActivity"
+            android:name=".activities.EditGroupActivity"
             android:label="@string/title_activity_create_group"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

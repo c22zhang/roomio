@@ -23,6 +23,8 @@ public final class Notification implements Jsonable {
         CLEAR_TASK_REQ(true),
         //your request has been accepted
         REQ_ACCEPTANCE(false),
+        //your request has been rejected
+        REQ_REJECTION(false),
         //you have been assigned a task
         ASSIGNMENT(false);
 

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.SignUpActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/signUpToolbar"
         android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:background="#2c2fe8"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="Sign Up"
-        app:titleTextColor="#FFFFFF"/>
+        app:titleTextColor="#FFFFFF" />
 
     <Button
         android:id="@+id/signUpActivityButton"
@@ -56,11 +57,11 @@
         android:id="@+id/emailText"
         android:layout_width="102dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="136dp"
         android:text="@string/email_text"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/passwordText"
-        app:layout_constraintStart_toStartOf="@+id/passwordText" />
+        app:layout_constraintStart_toStartOf="@+id/textView" />
 
     <TextView
         android:id="@+id/userText"
@@ -80,8 +81,7 @@
         android:layout_width="100dp"
         android:layout_height="77dp"
         android:layout_marginBottom="40dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="52dp"
         android:text="@string/re_enter_password"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -145,4 +145,32 @@
         android:inputType="textEmailSubject|textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="68dp"
+        android:text="Intended Group"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/editText"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordText"
+        app:layout_constraintTop_toBottomOf="@+id/emailText" />
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="166dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="Intended Group"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/intendedPasswordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText"
+        app:layout_constraintVertical_bias="0.507" />
 </android.support.constraint.ConstraintLayout>

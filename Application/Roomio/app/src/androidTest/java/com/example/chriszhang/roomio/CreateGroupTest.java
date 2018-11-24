@@ -4,7 +4,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import com.example.chriszhang.roomio.activities.CreateGroupActivity;
+import com.example.chriszhang.roomio.activities.EditGroupActivity;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
@@ -30,8 +30,8 @@ public class CreateGroupTest {
             Optional.<String>empty());
 
     @Rule
-    public ActivityTestRule<CreateGroupActivity> rule =
-            new ActivityTestRule<>(CreateGroupActivity.class);
+    public ActivityTestRule<EditGroupActivity> rule =
+            new ActivityTestRule<>(EditGroupActivity.class);
 
     @Test
     public void testCreateGroup(){

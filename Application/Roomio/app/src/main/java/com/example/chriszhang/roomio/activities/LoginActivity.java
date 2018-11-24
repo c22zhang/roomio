@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
@@ -30,6 +31,21 @@ public final class LoginActivity extends AppCompatActivity {
                     "abc@123.net",
                     Optional.<String>empty(),
                     Optional.<String>empty());
+    User user1 = new User(
+            "asdf",
+            "ChrisZhang",
+            "Chris Zhang",
+            "asdf@gmail.com",
+            Optional.<String>empty(),
+            Optional.<String>empty());
+    User user2 = new User(
+            "1234",
+            "LeBron LUL",
+            "LeBron James",
+            "asdf123@gmail.com",
+            Optional.<String>empty(),
+            Optional.<String>empty());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +68,14 @@ public final class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 State.createState(user);
+                Group g = new Group("",
+                        user.getUserId(),
+                        "some name");
+                user.setHouseholdGroupId(Optional.of(g.getGroupId()));
+                user.setAdminedGroupId(Optional.of(g.getGroupId()));
+                g.addMember(user1);
+                g.addMember(user2);
+                State.setGroup(g);
                 transition(NotificationsActivity.class);
             }
         });
