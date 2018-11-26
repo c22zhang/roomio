@@ -66,7 +66,7 @@ public final class SignUpActivity extends AppCompatActivity {
                     emailEditText.getText().toString(),
                     adminGroup,
                     Optional.of(intended.getGroupId()));
-            // TODO: send user to backend 
+            // TODO: send user to backend
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
         } else {
