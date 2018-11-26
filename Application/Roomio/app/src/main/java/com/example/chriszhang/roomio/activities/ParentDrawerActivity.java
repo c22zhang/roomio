@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 import com.example.chriszhang.roomio.R;
+import com.example.chriszhang.roomio.state.State;
 
 /**
  * Activity containing navigation logic for the navigation drawer. Any activity that
@@ -65,6 +66,9 @@ public class ParentDrawerActivity extends AppCompatActivity
             case R.id.navCreateGroups:
                 startNewActivityWith(this, EditGroupActivity.class);
                 break;
+            case R.id.logout:
+                State.getStateInstance().logout();
+                startNewActivityWith(this, LoginActivity.class);
             default:
                 break;
         }
