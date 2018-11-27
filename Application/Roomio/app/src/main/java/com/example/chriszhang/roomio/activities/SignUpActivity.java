@@ -65,7 +65,8 @@ public final class SignUpActivity extends AppCompatActivity {
                     nameEditText.getText().toString(),
                     emailEditText.getText().toString(),
                     adminGroup,
-                    Optional.of(intended.getGroupId()));
+                    //TODO: replace this with the id of var intended once function is created
+                    Optional.<String>empty());
             // TODO: send user to backend
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);

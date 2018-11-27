@@ -16,6 +16,9 @@ public class State {
 
     private static State stateInstance = null;
 
+    //For later use in avoiding network calls once backend is hooked up
+    private static boolean testMode = false;
+
     private State(User currentUser){
         this.currentUser = currentUser;
     }
@@ -28,6 +31,10 @@ public class State {
 
     public static boolean hasGroup() {
        return (stateInstance != null && stateInstance.group != null);
+    }
+
+    public static void setTestMode (boolean newMode){
+        testMode = newMode;
     }
 
     public static Group getGroup() {

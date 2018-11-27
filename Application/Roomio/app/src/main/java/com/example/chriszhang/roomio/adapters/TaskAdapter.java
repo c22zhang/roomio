@@ -53,11 +53,12 @@ public class TaskAdapter extends BaseAdapter {
         TextView assignee = row.findViewById(R.id.assigneeText);
         TextView assigner = row.findViewById(R.id.assignerText);
         taskName.setText(tasks.get(position).getTaskName());
-
+        String assigneeId = tasks.get(position).getAssigneeUserId();
+        String assignerId = tasks.get(position).getAssignerUserId();
         User taskAssignee =
-                State.getGroup().getMemberFromId(tasks.get(position).getAssigneeUserId()).get();
+                State.getGroup().getMemberFromId(assigneeId).get();
         User taskAssigner =
-                State.getGroup().getMemberFromId(tasks.get(position).getAssignerUserId()).get();
+                State.getGroup().getMemberFromId(assignerId).get();
         assignee.setText(taskAssignee.getName());
         assigner.setText(taskAssigner.getName());
         return row;

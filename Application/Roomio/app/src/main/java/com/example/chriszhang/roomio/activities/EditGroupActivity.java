@@ -64,7 +64,6 @@ public final class EditGroupActivity extends ParentDrawerActivity{
     }
 
     private void saveGroup(){
-        String groupName;
         if(State.hasGroup()){
             Group group = State.getGroup();
             if(getGroupName().isPresent()){
@@ -73,18 +72,6 @@ public final class EditGroupActivity extends ParentDrawerActivity{
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "Edited group!", Snackbar.LENGTH_LONG).show();
             //TODO: lookup usernames from backend and add and remove as necessary
-        } else {
-            if(getGroupName().isPresent()){
-                groupName = getGroupName().get();
-                State.getGroup().setGroupName(groupName);
-            } else {
-                Snackbar.make(getWindow().getDecorView().getRootView(),
-                        "Group name must be set if creating a group from scratch!",
-                        Snackbar.LENGTH_LONG).show();
-                return;
-            }
-            Snackbar.make(getWindow().getDecorView().getRootView(),
-                    "Group saved!", Snackbar.LENGTH_LONG).show();
         }
     }
 

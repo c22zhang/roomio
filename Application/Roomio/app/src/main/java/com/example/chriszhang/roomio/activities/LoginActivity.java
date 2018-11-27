@@ -80,6 +80,7 @@ public final class LoginActivity extends AppCompatActivity {
                 g.addMember(user1);
                 g.addMember(user2);
                 State.setGroup(g);
+                login();
                 transition(NotificationsActivity.class);
             }
         });

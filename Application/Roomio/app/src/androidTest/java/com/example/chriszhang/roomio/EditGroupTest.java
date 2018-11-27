@@ -52,6 +52,7 @@ public class EditGroupTest {
 
     @Test
     public void testCreateGroup(){
+        State.setTestMode(true);
         State.getStateInstance().logout();
         State.createState(test1);
         State.setGroup(group);
@@ -66,6 +67,7 @@ public class EditGroupTest {
 
     @Test
     public void testCannotCreateGroup(){
+        State.setTestMode(true);
         State.getStateInstance().logout();
         State.createState(test2);
         State.setGroup(group2);
