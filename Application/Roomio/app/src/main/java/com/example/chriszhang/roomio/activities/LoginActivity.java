@@ -25,7 +25,6 @@ public final class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
     private Button signup, signin;
-    private Optional<String> usernameText, passwordText;
 
     //TODO: FOR TEST PURPOSES ONLY, REPLACE ONCE SERVER WORKS
     private static final User user =
