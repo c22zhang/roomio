@@ -11,6 +11,10 @@ import android.widget.EditText;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.Client;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Optional;
 
@@ -53,23 +57,21 @@ public final class SignUpActivity extends AppCompatActivity {
 
     private void signUp() {
         if(hasAllNecessaryFields()){
-            // TODO: implement this method with backend calls
-            Group intended = getGroupOrCreate();
-            Optional<String> adminGroup = Optional.empty();
-            if(creatingNewGroup){
-                adminGroup = Optional.of(intended.getGroupId());
+            JSONObject newUser = new JSONObject();
+            try{
+                newUser.put("desired_username", usernameEditText.getText().toString());
+                newUser.put("password", passwordEditText.getText().toString());
+                newUser.put("group_id", intendedGroupEditText.getText().toString());
+                newUser.put("email", emailEditText.getText().toString());
+                newUser.put("name", nameEditText.getText().toString());
+                Client client = new Client(this);
+                client.postSignup(newUser, getWindow().getDecorView().getRootView());
+            } catch(JSONException e){
+                e.printStackTrace();
+                Snackbar.make(getWindow().getDecorView().getRootView(),
+                        "An error occurred when trying to sign up. Please try again.",
+                        Snackbar.LENGTH_LONG);
             }
-            User user = new User(
-                    "",
-                    usernameEditText.getText().toString(),
-                    nameEditText.getText().toString(),
-                    emailEditText.getText().toString(),
-                    adminGroup,
-                    //TODO: replace this with the id of var intended once function is created
-                    Optional.<String>empty());
-            // TODO: send user to backend
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
         } else {
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "You must fill out all fields before signing up!",

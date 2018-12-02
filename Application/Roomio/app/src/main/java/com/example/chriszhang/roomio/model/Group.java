@@ -38,6 +38,12 @@ public final class Group implements Jsonable {
         this.groupName = groupName;
     }
 
+    public Group(String groupId, String groupAdminUserId){
+        this.groupId = groupId;
+        this.groupAdminUserId = groupAdminUserId;
+        this.groupName = groupId;
+    }
+
     // assorted getters/setters
     public String getGroupId() { return groupId; }
     public String getGroupAdminUserId() { return groupAdminUserId; }
@@ -156,7 +162,6 @@ public final class Group implements Jsonable {
     public JSONObject toJson() throws JSONException {
         JSONObject object = new JSONObject();
         object.put("group_id", groupId);
-        object.put("group_name", groupName);
         object.put("group_admin_user_id", groupAdminUserId);
 
         object.put("members", generateMembersList());
@@ -179,19 +184,17 @@ public final class Group implements Jsonable {
         Set<String> required =
                 Utils.requiredFieldSet(
                         "group_id",
-                        "group_name",
                         "group_admin_user_id",
                         "members",
-                        "group_tasks",
+                        "groupTasks",
                         "messages");
         if(Utils.containsRequiredFields(obj, required)){
             JSONArray members = obj.getJSONArray("members");
-            JSONArray tasks = obj.getJSONArray("group_tasks");
+            JSONArray tasks = obj.getJSONArray("groupTasks");
             JSONArray messages = obj.getJSONArray("messages");
             group = new Group(
                     (String) obj.get("group_id"),
-                    (String) obj.get("group_admin_user_id"),
-                    (String) obj.get("group_name"));
+                    (String) obj.get("group_admin_user_id"));
             group = parseMembers(group, members);
             group = parseMessages(group, messages);
             group = parseTasks(group, tasks);

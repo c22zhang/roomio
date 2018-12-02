@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.example.chriszhang.roomio.R;
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.User;
+import com.example.chriszhang.roomio.state.Client;
 import com.example.chriszhang.roomio.state.State;
 
 import org.json.JSONException;
@@ -25,30 +26,6 @@ public final class LoginActivity extends AppCompatActivity {
 
     private EditText username, password;
     private Button signup, signin;
-
-    //TODO: FOR TEST PURPOSES ONLY, REPLACE ONCE SERVER WORKS
-    private static final User user =
-            new User("ABC",
-                    "Test test",
-                    "Test Test",
-                    "abc@123.net",
-                    Optional.<String>empty(),
-                    Optional.<String>empty());
-    User user1 = new User(
-            "asdf",
-            "ChrisZhang",
-            "Chris Zhang",
-            "asdf@gmail.com",
-            Optional.<String>empty(),
-            Optional.<String>empty());
-    User user2 = new User(
-            "1234",
-            "LeBron LUL",
-            "LeBron James",
-            "asdf123@gmail.com",
-            Optional.<String>empty(),
-            Optional.<String>empty());
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,18 +47,7 @@ public final class LoginActivity extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                State.createState(user);
-                Group g = new Group("",
-                        user.getUserId(),
-                        "some name");
-                g.addMember(user);
-                user.setHouseholdGroupId(Optional.of(g.getGroupId()));
-                user.setAdminedGroupId(Optional.of(g.getGroupId()));
-                g.addMember(user1);
-                g.addMember(user2);
-                State.setGroup(g);
                 login();
-                transition(NotificationsActivity.class);
             }
         });
     }
@@ -91,12 +57,12 @@ public final class LoginActivity extends AppCompatActivity {
             String mUsername = username.getText().toString();
             String mPass = password.getText().toString();
             JSONObject loginObject = new JSONObject();
+            Client client = new Client(this);
             try {
                 loginObject.put("username", mUsername);
                 loginObject.put("password", mPass);
                 //TODO: post to backend
-                getUserWithPassword();
-                getGroupWithUser();
+                client.postLogin(loginObject, getWindow().getDecorView().getRootView());
             } catch (JSONException e) {
                 e.printStackTrace();
                 Snackbar.make(getWindow().getDecorView().getRootView(),
@@ -108,16 +74,6 @@ public final class LoginActivity extends AppCompatActivity {
                     "You must fill in both the username and password field",
                     Snackbar.LENGTH_LONG).show();
         }
-    }
-
-    // TODO: implement these
-    private User getUserWithPassword(){
-        return null;
-    }
-
-    // TODO: implement this
-    private Group getGroupWithUser(){
-        return null;
     }
 
     private boolean hasAllFields(){

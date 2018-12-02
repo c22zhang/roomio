@@ -47,6 +47,20 @@ public final class User implements Jsonable {
 
     }
 
+    public User(
+            String userId,
+            String name,
+            String email,
+            Optional<String> adminedGroupId,
+            Optional<String> householdGroupId) {
+        this.userId = userId;
+        this.username = userId;
+        this.name = name;
+        this.email = email;
+        this.adminedGroupId = adminedGroupId;
+        this.householdGroupId = householdGroupId;
+    }
+
     // assorted getters/setters
     public String getUserId() { return userId; }
     public String getUsername() { return username; }
@@ -122,7 +136,6 @@ public final class User implements Jsonable {
     public JSONObject toJson() throws JSONException {
         JSONObject obj = new JSONObject();
         obj.put("user_id", userId);
-        obj.put("username", username);
         obj.put("name", name);
         obj.put("email", email);
 
@@ -167,7 +180,6 @@ public final class User implements Jsonable {
         Set<String> required =
                 Utils.requiredFieldSet(
                         "user_id",
-                        "username",
                         "name",
                         "email",
                         "involved_tabs",
@@ -186,7 +198,6 @@ public final class User implements Jsonable {
 
             user = new User(
                     (String) obj.get("user_id"),
-                    (String) obj.get("username"),
                     (String) obj.get("name"),
                     (String) obj.get("email"),
                     adminedGroupId,
