@@ -1,7 +1,13 @@
 package com.example.chriszhang.roomio.state;
 
+import android.content.Context;
+import android.content.Intent;
+import android.view.View;
+
 import com.example.chriszhang.roomio.model.Group;
 import com.example.chriszhang.roomio.model.User;
+
+import org.json.JSONException;
 
 import java.util.HashMap;
 
@@ -37,6 +43,8 @@ public class State {
         testMode = newMode;
     }
 
+    public static boolean isInTestMode() { return testMode; }
+
     public static Group getGroup() {
         return getStateInstance().group;
     }
@@ -51,6 +59,20 @@ public class State {
 
     public static void setGroup (Group g){
         stateInstance.group = g;
+    }
+
+    public static void markGroupAsUpdated(Context ctx, View errView) {
+        Client client = new Client(ctx);
+        try {
+            client.postGroup(getGroup().toJson(), errView);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void pullGroup(Context ctx, View errView) {
+        Client client = new Client(ctx);
+        client.retrieveGroup(errView);
     }
 
     /**

@@ -63,9 +63,6 @@ public class ParentDrawerActivity extends AppCompatActivity
             case R.id.navTabs:
                 startNewActivityWith(this, MyTabsActivity.class);
                 break;
-            case R.id.navCreateGroups:
-                startNewActivityWith(this, EditGroupActivity.class);
-                break;
             case R.id.logout:
                 State.getStateInstance().logout();
                 startNewActivityWith(this, LoginActivity.class);

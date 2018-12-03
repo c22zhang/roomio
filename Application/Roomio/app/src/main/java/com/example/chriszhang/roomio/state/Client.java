@@ -20,6 +20,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 
+/**
+ * Class for interfacing with backend HTTP Server
+ */
 public class Client {
 
     private Context ctx;
@@ -58,8 +61,9 @@ public class Client {
                         Snackbar.LENGTH_LONG).show();
             }
         });
-        rq.add(jr);
-    }
+        if(!State.isInTestMode()){
+            rq.add(jr);
+        }    }
 
     public void postSignup(final JSONObject signupObject, final View view) {
         JsonObjectRequest jr = new JsonObjectRequest(url + "/newusers", signupObject,
@@ -82,10 +86,13 @@ public class Client {
             }
         });
 
-        rq.add(jr);
+        if(!State.isInTestMode()){
+            rq.add(jr);
+        }
     }
 
-    public void updateGroup(final JSONObject updateObject, final View view, final Intent transition) {
+    public void postGroup(final JSONObject updateObject, final View view) {
+        // Post locally updated group to server
         JsonObjectRequest postReq = new JsonObjectRequest(url + "/groups", updateObject, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
@@ -97,30 +104,36 @@ public class Client {
                         Snackbar.LENGTH_LONG).show();
             }
         });
-        rq.add(postReq);
 
+        if(!State.isInTestMode()){
+            rq.add(postReq);
+        }
+    }
+
+    public void retrieveGroup(final View errView){
         String id = State.getGroup().getGroupId();
         JsonObjectRequest getReq = new JsonObjectRequest(url + "/groups/" + id, null,
                 new Response.Listener<JSONObject>(){
-            @Override
-            public void onResponse(JSONObject response) {
-                try{
-                    Group group = Group.from(response);
-                    State.setGroup(group);
-                    ctx.startActivity(transition);
-                } catch(JSONException | JsonToObjectException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new Response.ErrorListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Group group = Group.from(response);
+                            State.setGroup(group);
+                        } catch(JSONException | JsonToObjectException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar.make(view, "An error occurred with message: " + error.getMessage(),
+                Snackbar.make(errView, "An error occurred with message: " + error.getMessage(),
                         Snackbar.LENGTH_LONG).show();
             }
         });
 
-        rq.add(getReq);
+        if(!State.isInTestMode()){
+            rq.add(getReq);
+        }
     }
 
 }

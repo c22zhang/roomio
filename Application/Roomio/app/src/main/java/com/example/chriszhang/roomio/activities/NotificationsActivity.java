@@ -38,6 +38,8 @@ public final class NotificationsActivity extends ParentDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifications);
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
+
         Toolbar toolbar =  findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

@@ -38,6 +38,8 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_house_tasks);
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -89,6 +91,7 @@ public final class HouseTasksActivity extends ParentDrawerActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
         houseTasks.clear();
         houseTasks.addAll(State.getGroup().getTasks());
         adapter.notifyDataSetChanged();

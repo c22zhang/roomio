@@ -112,6 +112,7 @@ public class TabDetailActivity extends AppCompatActivity {
                     assignee.getUserId(),
                     Notification.Type.CLEAR_TAB_REQ,
                     Optional.<Jsonable>of(Tab.from(obj))));
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
         } catch(JSONException | JsonToObjectException e){
@@ -132,6 +133,7 @@ public class TabDetailActivity extends AppCompatActivity {
             Tab tab = Tab.from(obj);
             assignee.deleteTab(tab);
             assigner.deleteTab(tab);
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             startActivity(intent);
         } catch(JSONException | JsonToObjectException e){
             e.printStackTrace();

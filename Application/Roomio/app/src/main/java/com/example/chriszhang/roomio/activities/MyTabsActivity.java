@@ -38,6 +38,7 @@ public final class MyTabsActivity extends ParentDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_tabs);
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -87,6 +88,7 @@ public final class MyTabsActivity extends ParentDrawerActivity {
     @Override
     protected void onRestart() {
         super.onRestart();
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
         tabs.clear();
         tabs.addAll(State.getCurrentUser().getMyTabs());
         adapter.notifyDataSetChanged();

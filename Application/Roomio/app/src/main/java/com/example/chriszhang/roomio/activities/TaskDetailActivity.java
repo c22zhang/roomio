@@ -114,6 +114,7 @@ public class TaskDetailActivity extends AppCompatActivity {
                     Notification.Type.CLEAR_TASK_REQ,
                     Optional.<Jsonable>of(Task.from(obj)));
             assigner.addNotification(notification);
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             Snackbar.make(getWindow().getDecorView().getRootView(),
                     "Your clear request has been sent!", Snackbar.LENGTH_LONG).show();
         } catch(JSONException | JsonToObjectException e){
@@ -130,6 +131,7 @@ public class TaskDetailActivity extends AppCompatActivity {
         Group group = State.getGroup();
         try{
             group.deleteTask(Task.from(obj));
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             startActivity(intent);
         } catch (JSONException | JsonToObjectException e){
             e.printStackTrace();

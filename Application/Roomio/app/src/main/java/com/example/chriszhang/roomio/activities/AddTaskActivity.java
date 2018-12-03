@@ -101,6 +101,7 @@ public class AddTaskActivity extends AppCompatActivity {
                     Utils.getCurrentDate());
             this.generatedTask = task;
             group.addTask(task);
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             return RESULT_OK;
         } else {
             Snackbar.make(getWindow().getDecorView().getRootView(),

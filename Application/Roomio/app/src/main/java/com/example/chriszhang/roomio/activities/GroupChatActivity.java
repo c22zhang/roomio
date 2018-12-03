@@ -40,6 +40,8 @@ public final class GroupChatActivity extends ParentDrawerActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -67,6 +69,13 @@ public final class GroupChatActivity extends ParentDrawerActivity {
         });
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        State.pullGroup(this, getWindow().getDecorView().getRootView());
+        updateList();
+    }
+
     private void updateList(){
         messages.clear();
         messages.addAll(State.getGroup().getGroupChatMessages());
@@ -81,6 +90,7 @@ public final class GroupChatActivity extends ParentDrawerActivity {
                         State.getCurrentUser().getUserId(),
                         Utils.getCurrentDate());
                 State.getGroup().addMessage(msg);
+                State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
                 messageEdit.setText("");
                 updateList();
             }

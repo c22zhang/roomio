@@ -115,6 +115,7 @@ public class AddTabActivity extends AppCompatActivity {
             this.generatedTab = tab;
             current.addTab(tab);
             assignee.get().addTab(tab);
+            State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
             return RESULT_OK;
         } else {
             return RESULT_CANCELED;

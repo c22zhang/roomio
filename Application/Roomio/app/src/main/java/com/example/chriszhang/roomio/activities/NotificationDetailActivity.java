@@ -36,6 +36,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_detail);
 
+
         Intent intent = getIntent();
         String notificationJson = intent.getExtras().get("current_notification").toString();
         Boolean isClearable = (Boolean) intent.getExtras().get("is_clearable");
@@ -118,6 +119,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 Optional.of(cleared));
         receivingUser.addNotification(n);
         sendingUser.deleteNotification(Notification.from(ogNotification));
+        State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
     }
@@ -134,6 +136,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 Optional.<Jsonable>empty());
         receivingUser.addNotification(n);
         sendingUser.deleteNotification(Notification.from(ogNotification));
+        State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
     }

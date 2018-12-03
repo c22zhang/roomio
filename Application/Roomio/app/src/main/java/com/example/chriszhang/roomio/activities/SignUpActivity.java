@@ -27,7 +27,6 @@ public final class SignUpActivity extends AppCompatActivity {
     EditText nameEditText, emailEditText,
             usernameEditText, passwordEditText,
             reenterEditText, intendedGroupEditText;
-    boolean creatingNewGroup = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +77,6 @@ public final class SignUpActivity extends AppCompatActivity {
                     Snackbar.LENGTH_LONG).show();
         }
 
-    }
-
-    //TODO: implement this method ==========================
-    private Group getGroupOrCreate(){
-        return null;
     }
 
     private boolean hasAllNecessaryFields() {
