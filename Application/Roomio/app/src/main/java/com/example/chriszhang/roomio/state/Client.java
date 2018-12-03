@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class Client {
 
     private Context ctx;
-    private String url = "http://172.20.29.173:7070";
+    private String url = "http://172.20.47.207:7070";
     private RequestQueue rq;
 
     public Client(Context ctx){
@@ -42,13 +42,21 @@ public class Client {
                 try{
                     System.out.println(response.toString(4));
                     Group group = Group.from(response);
-                    User currentUser  =
-                            group.getMemberFromUsername(
-                                    loginObject.get("username").toString()).get();
-                    State.createState(currentUser);
-                    State.setGroup(group);
-                    Intent intent = new Intent(ctx, NotificationsActivity.class);
-                    ctx.startActivity(intent);
+                    if(group.getMemberFromUsername(loginObject.get("username").toString()).isPresent()){
+                        User currentUser  =
+                                group.getMemberFromUsername(
+                                        loginObject.get("username").toString()).get();
+                        State.createState(currentUser);
+                        State.setGroup(group);
+                        Intent intent = new Intent(ctx, NotificationsActivity.class);
+                        ctx.startActivity(intent);
+                    } else {
+                        System.out.println(group);
+                        Snackbar.make(view,
+                                "An error occurred when fetching the user, please try again.",
+                                Snackbar.LENGTH_LONG).show();
+                    }
+
                 } catch(JSONException | JsonToObjectException e) {
                     e.printStackTrace();
                 }
@@ -100,8 +108,9 @@ public class Client {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Snackbar.make(view, "An error occurred with message: " + error.getMessage(),
-                        Snackbar.LENGTH_LONG).show();
+                System.out.println(error);
+               // Snackbar.make(view, "An error occurred with message: " + error.getMessage(),
+                //        Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -111,28 +120,30 @@ public class Client {
     }
 
     public void retrieveGroup(final View errView){
-        String id = State.getGroup().getGroupId();
-        JsonObjectRequest getReq = new JsonObjectRequest(url + "/groups/" + id, null,
-                new Response.Listener<JSONObject>(){
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try{
-                            Group group = Group.from(response);
-                            State.setGroup(group);
-                        } catch(JSONException | JsonToObjectException e) {
-                            e.printStackTrace();
+        if(State.getGroup() != null){
+            String id = State.getGroup().getGroupId();
+            JsonObjectRequest getReq = new JsonObjectRequest(url + "/groups/" + id, null,
+                    new Response.Listener<JSONObject>(){
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try{
+                                System.out.println("response from retrieveGroup " + response);
+                                Group group = Group.from(response);
+                                State.setGroup(group);
+                            } catch(JSONException | JsonToObjectException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Snackbar.make(errView, "An error occurred with message: " + error.getMessage(),
-                        Snackbar.LENGTH_LONG).show();
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Snackbar.make(errView, "An error occurred with message: " + error.getMessage(),
+                            Snackbar.LENGTH_LONG).show();
+                }
+            });
+            if(!State.isInTestMode()){
+                rq.add(getReq);
             }
-        });
-
-        if(!State.isInTestMode()){
-            rq.add(getReq);
         }
     }
 

@@ -46,7 +46,11 @@ public class State {
     public static boolean isInTestMode() { return testMode; }
 
     public static Group getGroup() {
-        return getStateInstance().group;
+        if(getStateInstance() != null){
+            return getStateInstance().group;
+        } else {
+            return null;
+        }
     }
 
     public static User getCurrentUser() {

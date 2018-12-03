@@ -16,6 +16,8 @@ import com.example.chriszhang.roomio.model.Tab;
 import com.example.chriszhang.roomio.model.User;
 import com.example.chriszhang.roomio.state.State;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,13 +64,16 @@ public class TabAdapter extends BaseAdapter {
         TextView assignee = row.findViewById(R.id.tabAssignee);
         TextView assigner = row.findViewById(R.id.tabAssigner);
         Tab currTab = tabs.get(position);
-        amount.setText(String.format("$%.2f", amount.getText().toString()));
+
         tabName.setText(currTab.getReason());
 
         User tabAssignee = State.getGroup().getMemberFromId(currTab.getAssigneeUserId()).get();
         User tabAssigner = State.getGroup().getMemberFromId(currTab.getAssignerUserId()).get();
-        assignee.setText(tabAssignee.getName());
-        assigner.setText(tabAssigner.getName());
+        NumberFormat formatter = new DecimalFormat("#0.00");
+        String amt = formatter.format(currTab.getAmount());
+        assignee.setText("Assignee: " + tabAssignee.getName());
+        assigner.setText("Assigner: " + tabAssigner.getName());
+        amount.setText("$" + amt);
         return row;
     }
 }

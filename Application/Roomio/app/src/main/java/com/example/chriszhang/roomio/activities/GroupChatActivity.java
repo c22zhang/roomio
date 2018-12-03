@@ -22,6 +22,8 @@ import com.example.chriszhang.roomio.model.Message;
 import com.example.chriszhang.roomio.state.State;
 import com.example.chriszhang.roomio.utils.Utils;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 /**
@@ -41,7 +43,7 @@ public final class GroupChatActivity extends ParentDrawerActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
         State.pullGroup(this, getWindow().getDecorView().getRootView());
-
+        System.out.println(State.getGroup().getGroupChatMessages());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -60,6 +62,8 @@ public final class GroupChatActivity extends ParentDrawerActivity {
         adapter = new GroupChatAdapter(this, messages);
         listView = findViewById(R.id.groupChatList);
         listView.setAdapter(adapter);
+
+        updateList();
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override

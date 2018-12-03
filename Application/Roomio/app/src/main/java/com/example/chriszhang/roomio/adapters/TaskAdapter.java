@@ -59,8 +59,8 @@ public class TaskAdapter extends BaseAdapter {
                 State.getGroup().getMemberFromId(assigneeId).get();
         User taskAssigner =
                 State.getGroup().getMemberFromId(assignerId).get();
-        assignee.setText(taskAssignee.getName());
-        assigner.setText(taskAssigner.getName());
+        assignee.setText("Assignee: " + taskAssignee.getName());
+        assigner.setText("Assigner: " + taskAssigner.getName());
         return row;
     }
 }

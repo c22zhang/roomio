@@ -90,7 +90,6 @@ public class NotificationDetailActivity extends AppCompatActivity {
         }
     }
 
-
     private void clear(User sendingUser, User receivingUser,
                        JSONObject potentialClear, JSONObject ogNotification)
             throws JSONException, JsonToObjectException {
@@ -119,6 +118,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
                 Optional.of(cleared));
         receivingUser.addNotification(n);
         sendingUser.deleteNotification(Notification.from(ogNotification));
+        System.out.println(sendingUser.toJson().toString(4));
         State.markGroupAsUpdated(this, getWindow().getDecorView().getRootView());
         Intent intent = new Intent(this, NotificationsActivity.class);
         startActivity(intent);
@@ -127,7 +127,7 @@ public class NotificationDetailActivity extends AppCompatActivity {
     private void dontClear(User sendingUser, User receivingUser,
                            JSONObject ogNotification)
             throws JSONException, JsonToObjectException {
-        String message = String.format("User %s will not clear your task/tab.", sendingUser);
+        String message = String.format("User %s will not clear your task/tab.", sendingUser.getUsername());
         Notification n = new Notification("",
                 message,
                 receivingUser.getUserId(),

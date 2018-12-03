@@ -106,6 +106,19 @@ public final class Notification implements Jsonable {
         return obj;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Notification){
+            Notification not = (Notification) obj;
+            return notificationId.equals( not.notificationId) &&
+                    message.equals(not.message) &&
+                    notificationType.equals(not.notificationType) &&
+                    toUserId.equals(not.toUserId) &&
+                    fromUserId.equals(not.fromUserId);
+        }
+        return false;
+    }
+
     /**
      * Convenience method for instantiating a Notification via JSONObject
      * @param obj JSONObject representing a Notification

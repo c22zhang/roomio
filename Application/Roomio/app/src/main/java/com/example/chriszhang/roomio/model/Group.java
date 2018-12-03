@@ -186,11 +186,11 @@ public final class Group implements Jsonable {
                         "group_id",
                         "group_admin_user_id",
                         "members",
-                        "groupTasks",
+                        "group_tasks",
                         "messages");
         if(Utils.containsRequiredFields(obj, required)){
             JSONArray members = obj.getJSONArray("members");
-            JSONArray tasks = obj.getJSONArray("groupTasks");
+            JSONArray tasks = obj.getJSONArray("group_tasks");
             JSONArray messages = obj.getJSONArray("messages");
             group = new Group(
                     (String) obj.get("group_id"),

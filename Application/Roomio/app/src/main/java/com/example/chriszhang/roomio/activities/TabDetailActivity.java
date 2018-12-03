@@ -20,6 +20,8 @@ import com.example.chriszhang.roomio.state.State;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Optional;
 
 /**
@@ -59,7 +61,9 @@ public class TabDetailActivity extends AppCompatActivity {
             final String assignerId = obj.get("assigner").toString();
             final String reason = obj.get("reason").toString();
             final Double amount = Double.parseDouble(obj.get("amount").toString());
-            appendToText(tabDetailAmountText, " " + obj.get("amount"));
+            NumberFormat formatter = new DecimalFormat("#0.00");
+
+            appendToText(tabDetailAmountText, " $" + formatter.format(obj.get("amount")));
             appendToText(tabDetailAssigneeText, " " +
                     group.getMemberFromId(assigneeId).get().getUsername());
             appendToText(tabDetailAssignerText, " " +
