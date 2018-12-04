@@ -118,13 +118,19 @@ public final class Tab implements Jsonable {
                         "date_assigned",
                         "amount");
         if(Utils.containsRequiredFields(obj, requiredFields)){
+            Double amount;
+            if(obj.get("amount") instanceof Integer){
+                amount = Double.valueOf((Integer) obj.get("amount"));
+            } else {
+                amount = (Double) obj.get("amount");
+            }
             return new Tab(
                     (String) obj.get("tab_id"),
                     (String) obj.get("reason"),
                     (String) obj.get("assignee"),
                     (String) obj.get("assigner"),
                     (String) obj.get("date_assigned"),
-                    Double.valueOf((Integer) obj.get("amount")));
+                    amount);
         } else {
             throw new JsonToObjectException("Did not contain all required fields");
         }
