@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class Client {
 
     private Context ctx;
-    private String url = "http://172.20.47.207:7070";
+    private String url = "http://172.20.35.193:7070";
     private RequestQueue rq;
 
     public Client(Context ctx){

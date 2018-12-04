@@ -91,6 +91,7 @@ public class AddTabActivity extends AppCompatActivity {
                 State.getCurrentUser().getUserId(),
                 Notification.Type.ASSIGNMENT,
                 Optional.<Jsonable>empty()));
+        System.out.println(group);
     }
 
     private int maybeCreateAndAddTab(Optional<User> assignee, User current, Group group){

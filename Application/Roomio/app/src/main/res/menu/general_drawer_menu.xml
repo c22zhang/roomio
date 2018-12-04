@@ -17,6 +17,9 @@
             android:id="@+id/navTabs"
             android:title="@string/my_tabs" />
         <item
+            android:id="@+id/navGroupInfo"
+            android:title="Group Info" />
+        <item
             android:id="@+id/logout"
             android:title="Logout" />
     </group>

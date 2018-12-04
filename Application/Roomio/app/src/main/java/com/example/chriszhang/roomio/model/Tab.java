@@ -124,7 +124,7 @@ public final class Tab implements Jsonable {
                     (String) obj.get("assignee"),
                     (String) obj.get("assigner"),
                     (String) obj.get("date_assigned"),
-                    (Double) obj.get("amount"));
+                    Double.valueOf((Integer) obj.get("amount")));
         } else {
             throw new JsonToObjectException("Did not contain all required fields");
         }

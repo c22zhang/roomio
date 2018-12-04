@@ -142,7 +142,7 @@
         android:layout_marginRight="32dp"
         android:ems="10"
         android:hint="@string/re_enter_password"
-        android:inputType="textEmailSubject|textPassword"
+        android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

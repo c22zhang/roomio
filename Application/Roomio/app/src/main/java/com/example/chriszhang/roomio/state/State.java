@@ -54,7 +54,12 @@ public class State {
     }
 
     public static User getCurrentUser() {
-        return getStateInstance().currentUser;
+        if(getStateInstance().currentUser != null){
+            return getStateInstance().currentUser;
+
+        } else {
+            return null;
+        }
     }
 
     public static State getStateInstance() {

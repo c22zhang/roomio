@@ -59,4 +59,5 @@
     <string name="enter_reason_for_tab">Enter reason for tab:</string>
     <string name="amount">Amount</string>
     <string name="no_sender">Could not determine sender.</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

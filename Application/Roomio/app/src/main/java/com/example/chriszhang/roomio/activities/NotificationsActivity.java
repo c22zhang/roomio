@@ -53,8 +53,10 @@ public final class NotificationsActivity extends ParentDrawerActivity {
         NavigationView navigationView =  findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        User currentUser = State.getCurrentUser();
-        notifications.addAll(currentUser.getNotifications());
+        if(State.getCurrentUser() != null){
+            User currentUser = State.getCurrentUser();
+            notifications.addAll(currentUser.getNotifications());
+        }
 
         adapter = new PersonalNotificationAdapter(this, notifications);
 
