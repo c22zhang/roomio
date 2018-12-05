@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.LoginActivity">
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/signInToolBar"
         android:layout_width="match_parent"
@@ -12,8 +13,7 @@
         android:background="#2c2fe8"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:title="Welcome to Room.io!"
-        app:titleTextColor="#FFFFFF"
-        />
+        app:titleTextColor="#FFFFFF" />
 
     <TextView
         android:id="@+id/roomioText"
@@ -33,18 +33,16 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/username"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.271"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.563" />
+        app:layout_constraintVertical_bias="0.555" />
 
     <TextView
         android:id="@+id/passwordText"
@@ -52,16 +50,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="172dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         android:text="@string/password"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/usernameText"
         app:layout_constraintHorizontal_bias="0.271"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/usernameText"
         app:layout_constraintTop_toBottomOf="@+id/usernameText"
         app:layout_constraintVertical_bias="0.492" />
 
@@ -71,14 +67,13 @@
         android:layout_height="39dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_username_text"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/usernameText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/usernameText"
         app:layout_constraintVertical_bias="0.565" />
 
     <EditText
@@ -87,15 +82,14 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="52dp"
-        android:layout_marginRight="52dp"
         android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="@string/enter_password_text"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/passwordText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.661" />
+        app:layout_constraintTop_toTopOf="@+id/passwordText"
+        app:layout_constraintVertical_bias="0.688" />
 
     <Button
         android:id="@+id/signInButton"
